@@ -1,4 +1,4 @@
-export interface GetGunsResults {
+export interface GetGunResults {
   info: Info;
   results: Gun[];
 }

@@ -1,7 +1,7 @@
 import type { GetStaticProps, NextPage } from "next";
 import Head from "next/head";
 import styles from "../styles/Home.module.css";
-import { GetGunResults, Gun } from "../types";
+import { Gun } from "../types";
 
 const Home: NextPage<{ guns: Gun[] }> = ({ guns }) => {
   return (
@@ -14,17 +14,19 @@ const Home: NextPage<{ guns: Gun[] }> = ({ guns }) => {
       {guns.map((gun) => {
         return (
           <ul key={gun.id}>
-            <li>{gun.name}</li>
-            <li>{gun.type}</li>
-            <li>{gun.price}</li>
-            <li>{gun.ammo}</li>
-            <li>{gun.killAward}</li>
-            <li>{gun.damage}</li>
-            <li>{gun.firerate}</li>
-            <li>{gun.recoilControl}</li>
-            <li>{gun.accurateRange}</li>
-            <li>{gun.armorPenetration}</li>
-            <li>{gun.side}</li>
+            <p>
+              <strong>{gun.name}</strong>
+            </p>
+            <li>Type: {gun.type}</li>
+            <li>Price: {gun.price}</li>
+            <li>Ammo: {gun.ammo}</li>
+            <li>Kill Award: {gun.killAward}</li>
+            <li>Damage: {gun.damage}</li>
+            <li>Firerate: {gun.firerate}</li>
+            <li>Recoil Control: {gun.recoilControl}</li>
+            <li>Accurate Range: {gun.accurateRange}</li>
+            <li>Armor Penetration: {gun.armorPenetration}</li>
+            <li>Side: {gun.side}</li>
           </ul>
         );
       })}
@@ -34,7 +36,7 @@ const Home: NextPage<{ guns: Gun[] }> = ({ guns }) => {
 
 export const getStaticProps: GetStaticProps = async (context) => {
   const res = await fetch("https://csgogunsapi.herokuapp.com/");
-  const data: GetGunResults = await res.json();
+  const data: Gun[] = await res.json();
 
   return { props: { guns: data } };
 };

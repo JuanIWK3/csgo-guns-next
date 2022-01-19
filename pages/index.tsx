@@ -18,14 +18,6 @@ const Home: NextPage<{ guns: Gun[] }> = ({ guns }) => {
     setFilteredGuns(filterGuns(allGuns, search));
   };
 
-  const style = {
-    li: {},
-    ul: {
-      border: "1px solid #444",
-      borderRadius: ".5rem",
-      margin: "16px",
-    },
-  };
   return (
     <div className={styles.container}>
       <Head>
@@ -54,20 +46,20 @@ const Home: NextPage<{ guns: Gun[] }> = ({ guns }) => {
       <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr 1fr" }}>
         {filteredGuns.map((gun) => {
           return (
-            <ul style={style.ul} key={gun.id}>
+            <ul className="gun" key={gun.id}>
               <p style={{ fontSize: "1.4rem" }}>
                 <strong>{gun.name}</strong>
               </p>
-              {/* <p>Type: {gun.type}</p>
-             <p>Price: {gun.price}</p> 
-             <p>Ammo: {gun.ammo}</p>
-            <p>Kill Award: {gun.killAward}</p>
-            <p>Damage: {gun.damage}</p>
-            <p>Firerate: {gun.firerate}</p>
-            <p>Recoil Control: {gun.recoilControl}</p>
-            <p>Accurate Range: {gun.accurateRange}</p>
-            <p>Armor Penetration: {gun.armorPenetration}</p>
-            <p>Side: {gun.side}</p> */}
+              <p>Type: {gun.type}</p>
+              <p>Price: {gun.price}</p>
+              <p>Ammo: {gun.ammo}</p>
+              <p>Kill Award: {gun.killAward}</p>
+              <p>Damage: {gun.damage}</p>
+              <p>Firerate: {gun.firerate}</p>
+              <p>Recoil Control: {gun.recoilControl}</p>
+              <p>Accurate Range: {gun.accurateRange}</p>
+              <p>Armor Penetration: {gun.armorPenetration}</p>
+              <p>Side: {gun.side}</p>
             </ul>
           );
         })}

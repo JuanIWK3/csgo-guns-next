@@ -16,3 +16,13 @@ a {
 * {
   box-sizing: border-box;
 }
+
+.gun {
+  border: 5px solid rgba(55, 0, 255, 0.322);
+  border-radius: 0.4rem;
+  margin: 12px;
+  transition: all 0.2s linear;
+  &:hover {
+    background-color: rgba(21, 0, 95, 0.247);
+  }
+}

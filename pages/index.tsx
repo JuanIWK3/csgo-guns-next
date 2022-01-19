@@ -43,7 +43,7 @@ const Home: NextPage<{ guns: Gun[] }> = ({ guns }) => {
           }}
         />
       </div>
-      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr 1fr" }}>
+      <div className="guns-grid">
         {filteredGuns.map((gun) => {
           return (
             <ul className="gun" key={gun.id}>

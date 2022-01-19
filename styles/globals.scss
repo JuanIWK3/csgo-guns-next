@@ -26,3 +26,32 @@ a {
     background-color: rgba(21, 0, 95, 0.247);
   }
 }
+
+.guns-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+}
+
+@media only screen and (max-width: 1124px) {
+  .guns-grid {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}
+@media only screen and (max-width: 900px) {
+  .guns-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+@media only screen and (max-width: 600px) {
+  .guns-grid {
+    display: flex;
+    flex-direction: column;
+  }
+  .gun {
+    height: 80px;
+    overflow: hidden;
+    &:hover {
+      height: max-content;
+    }
+  }
+}

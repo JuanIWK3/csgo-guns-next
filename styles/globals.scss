@@ -1,7 +1,5 @@
 html,
 body {
-  background-color: #222;
-  color: #fff;
   padding: 0;
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
@@ -17,41 +15,10 @@ a {
   box-sizing: border-box;
 }
 
-.gun {
-  border: 5px solid rgba(55, 0, 255, 0.322);
-  border-radius: 0.4rem;
-  margin: 12px;
-  transition: all 0.2s linear;
-  &:hover {
-    background-color: rgba(21, 0, 95, 0.247);
-  }
-}
-
-.guns-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
-}
-
-@media only screen and (max-width: 1124px) {
-  .guns-grid {
-    grid-template-columns: 1fr 1fr 1fr;
-  }
-}
-@media only screen and (max-width: 900px) {
-  .guns-grid {
-    grid-template-columns: 1fr 1fr;
-  }
-}
-@media only screen and (max-width: 600px) {
-  .guns-grid {
-    display: flex;
-    flex-direction: column;
-  }
-  .gun {
-    height: 80px;
-    overflow: hidden;
-    &:hover {
-      height: max-content;
-    }
-  }
+.text-input {
+  color: rgb(255, 255, 255);
+  background-color: #222;
+  border: 1px solid #333;
+  margin: 16px 0 8px 0;
+  text-align: center;
 }

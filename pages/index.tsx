@@ -1,21 +1,53 @@
 import type { GetStaticProps, NextPage } from "next";
 import Head from "next/head";
-import { SyntheticEvent, useState } from "react";
+import { SyntheticEvent, useRef, useState } from "react";
+
 import styles from "../styles/Home.module.css";
+import "bootswatch/dist/darkly/bootstrap.min.css";
+import { Button, Dropdown, Form, FormControl, Table } from "react-bootstrap";
+
 import { Gun } from "../types";
 
 const Home: NextPage<{ guns: Gun[] }> = ({ guns }) => {
   const [filteredGuns, setFilteredGuns] = useState<Gun[]>(guns);
+  const [typeDrop, setTypeDrop] = useState("Types");
   const allGuns = guns;
+  let gunTypes: string[] = [];
+
+  for (let i = 0; i < allGuns.length; i++) {
+    gunTypes[i] = allGuns[i].type;
+  }
+
+  gunTypes = removeDuplicates(gunTypes);
+
+  function removeDuplicates(arr: string[]) {
+    let s = new Set(arr);
+    let it = s.values();
+    return Array.from(it);
+  }
+
+  const filterByType = (e: any) => {
+    const { id } = e.currentTarget;
+    console.log(id);
+
+    const temp = guns.filter((gun) =>
+      gun.type.toUpperCase().includes(id.toUpperCase())
+    );
+
+    if (id !== "") setTypeDrop(id);
+    setFilteredGuns(temp);
+  };
 
   const handleSearch = (e: HTMLInputElement) => {
     const search = e.value;
-    const filterGuns = (movies: Gun[], search: string) => {
-      return movies.filter(
-        (gun) => gun.name.toLowerCase().indexOf(search.toLowerCase()) !== -1
+
+    const filterByName = (guns: Gun[], search: string) => {
+      return guns.filter((gun) =>
+        gun.name.toUpperCase().includes(search.toUpperCase())
       );
     };
-    setFilteredGuns(filterGuns(allGuns, search));
+
+    setFilteredGuns(filterByName(allGuns, search));
   };
 
   return (
@@ -25,45 +57,90 @@ const Home: NextPage<{ guns: Gun[] }> = ({ guns }) => {
         <meta name="description" content="Guns data" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <div>
-        <input
+      <div className="filters">
+        <FormControl
           style={{
-            backgroundColor: "#333",
-            border: "1px solid #222",
-            width: "100%",
-            height: "36px",
-            marginTop: "24px",
+            backgroundColor: "#222",
+            border: "1px solid #333",
             color: "#fff",
-            textAlign: "center",
-            fontSize: "18px",
           }}
+          className="text-input"
+          placeholder="Search Guns"
           type="text"
           onChange={(e: SyntheticEvent) => {
             handleSearch(e.currentTarget as HTMLInputElement);
           }}
         />
+        <Dropdown>
+          <Dropdown.Toggle variant="dark" id="dropdown-basic">
+            {typeDrop}
+          </Dropdown.Toggle>
+
+          <Dropdown.Menu>
+            <Dropdown.Item
+              id=""
+              onClick={(e) => {
+                setTypeDrop("All Types"), filterByType(e);
+              }}
+            >
+              All Types
+            </Dropdown.Item>
+            {gunTypes.map((type) => {
+              return (
+                <>
+                  <Dropdown.Item
+                    id={type}
+                    onClick={(e) => {
+                      filterByType(e);
+                    }}
+                    key={type}
+                  >
+                    {type}
+                  </Dropdown.Item>
+                </>
+              );
+            })}
+          </Dropdown.Menu>
+        </Dropdown>
       </div>
-      <div className="guns-grid">
-        {filteredGuns.map((gun) => {
-          return (
-            <ul className="gun" key={gun.id}>
-              <p style={{ fontSize: "1.4rem" }}>
-                <strong>{gun.name}</strong>
-              </p>
-              <p>Type: {gun.type}</p>
-              <p>Price: {gun.price}</p>
-              <p>Ammo: {gun.ammo}</p>
-              <p>Kill Award: {gun.killAward}</p>
-              <p>Damage: {gun.damage}</p>
-              <p>Firerate: {gun.firerate}</p>
-              <p>Recoil Control: {gun.recoilControl}</p>
-              <p>Accurate Range: {gun.accurateRange}</p>
-              <p>Armor Penetration: {gun.armorPenetration}</p>
-              <p>Side: {gun.side}</p>
-            </ul>
-          );
-        })}
-      </div>
+      <Table striped className="mt-2">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Price</th>
+            <th>Kill Award</th>
+            <th>Ammo</th>
+            <th>Damage</th>
+            <th>Firerate</th>
+            <th>Recoil Control</th>
+            <th>Accurate Range</th>
+            <th>Armor Penetration</th>
+            <th>Side</th>
+          </tr>
+        </thead>
+        <tbody>
+          {filteredGuns.map((gun) => {
+            return (
+              <>
+                <tr key={gun.id}>
+                  <td>{gun.name}</td>
+                  <td>{gun.type}</td>
+                  <td>{gun.price}</td>
+                  <td>{gun.killAward}</td>
+                  <td>{gun.ammo}</td>
+                  <td>{gun.damage}</td>
+                  <td>{gun.firerate}</td>
+                  <td>{gun.recoilControl}</td>
+                  <td>{gun.accurateRange}</td>
+                  <td>{gun.armorPenetration}</td>
+                  <td>{gun.side}</td>
+                </tr>
+              </>
+            );
+          })}
+        </tbody>
+      </Table>
     </div>
   );
 };

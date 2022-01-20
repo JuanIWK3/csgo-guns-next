@@ -11,14 +11,22 @@ import { Gun } from "../types";
 const Home: NextPage<{ guns: Gun[] }> = ({ guns }) => {
   const [filteredGuns, setFilteredGuns] = useState<Gun[]>(guns);
   const [typeDrop, setTypeDrop] = useState("Types");
+  const [sideDrop, setSideDrop] = useState("Sides");
   const allGuns = guns;
   let gunTypes: string[] = [];
+  let gunSides: string[] = [];
 
   for (let i = 0; i < allGuns.length; i++) {
     gunTypes[i] = allGuns[i].type;
   }
 
+  for (let i = 0; i < allGuns.length; i++) {
+    gunSides[i] = allGuns[i].side;
+  }
+
   gunTypes = removeDuplicates(gunTypes);
+
+  gunSides = removeDuplicates(gunSides);
 
   function removeDuplicates(arr: string[]) {
     let s = new Set(arr);
@@ -35,6 +43,16 @@ const Home: NextPage<{ guns: Gun[] }> = ({ guns }) => {
     );
 
     if (id !== "") setTypeDrop(id);
+    setFilteredGuns(temp);
+  };
+
+  const filterBySide = (e: any) => {
+    const { id } = e.currentTarget;
+    console.log(id);
+
+    const temp = guns.filter((gun) => gun.side === id);
+
+    if (id !== "") setSideDrop(id);
     setFilteredGuns(temp);
   };
 
@@ -71,37 +89,70 @@ const Home: NextPage<{ guns: Gun[] }> = ({ guns }) => {
             handleSearch(e.currentTarget as HTMLInputElement);
           }}
         />
-        <Dropdown>
-          <Dropdown.Toggle variant="dark" id="dropdown-basic">
-            {typeDrop}
-          </Dropdown.Toggle>
+        <div className="dropdowns">
+          <Dropdown>
+            <Dropdown.Toggle variant="dark" id="dropdown-basic">
+              {typeDrop}
+            </Dropdown.Toggle>
 
-          <Dropdown.Menu>
-            <Dropdown.Item
-              id=""
-              onClick={(e) => {
-                setTypeDrop("All Types"), filterByType(e);
-              }}
-            >
-              All Types
-            </Dropdown.Item>
-            {gunTypes.map((type) => {
-              return (
-                <>
-                  <Dropdown.Item
-                    id={type}
-                    onClick={(e) => {
-                      filterByType(e);
-                    }}
-                    key={type}
-                  >
-                    {type}
-                  </Dropdown.Item>
-                </>
-              );
-            })}
-          </Dropdown.Menu>
-        </Dropdown>
+            <Dropdown.Menu>
+              <Dropdown.Item
+                id=""
+                onClick={(e) => {
+                  setTypeDrop("All Types"), filterByType(e);
+                }}
+              >
+                All Types
+              </Dropdown.Item>
+              {gunTypes.map((type) => {
+                return (
+                  <>
+                    <Dropdown.Item
+                      id={type}
+                      onClick={(e) => {
+                        filterByType(e);
+                      }}
+                      key={type}
+                    >
+                      {type}
+                    </Dropdown.Item>
+                  </>
+                );
+              })}
+            </Dropdown.Menu>
+          </Dropdown>
+          <Dropdown>
+            <Dropdown.Toggle variant="dark" id="dropdown-basic">
+              {sideDrop}
+            </Dropdown.Toggle>
+
+            <Dropdown.Menu>
+              <Dropdown.Item
+                id=""
+                onClick={(e) => {
+                  setSideDrop("All Types"), filterByType(e);
+                }}
+              >
+                All Sides
+              </Dropdown.Item>
+              {gunSides.map((side) => {
+                return (
+                  <>
+                    <Dropdown.Item
+                      id={side}
+                      onClick={(e) => {
+                        filterBySide(e);
+                      }}
+                      key={side}
+                    >
+                      {side}
+                    </Dropdown.Item>
+                  </>
+                );
+              })}
+            </Dropdown.Menu>
+          </Dropdown>
+        </div>
       </div>
       <Table striped className="mt-2">
         <thead>

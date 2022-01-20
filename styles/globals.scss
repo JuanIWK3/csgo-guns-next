@@ -22,3 +22,11 @@ a {
   margin: 16px 0 8px 0;
   text-align: center;
 }
+
+.dropdowns {
+  display: flex;
+
+  #dropdown-basic {
+    margin: 4px;
+  }
+}

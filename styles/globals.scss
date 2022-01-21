@@ -23,10 +23,41 @@ a {
   text-align: center;
 }
 
-.dropdowns {
+.filters {
   display: flex;
+  justify-content: space-between;
 
-  #dropdown-basic {
-    margin: 4px;
+  .dropdowns {
+    display: flex;
+    width: 100%;
+
+    .dropdown {
+      margin-right: 8px;
+    }
+
+    #price-range {
+      background-color: #222;
+    }
+  }
+
+  .filter-buttons {
+    display: flex;
+
+    #dropdown-basic {
+      margin: 4px;
+    }
+
+    #apply-filters {
+      justify-self: flex-end;
+      width: 115px;
+      height: 38px;
+      margin-right: 8px;
+    }
+
+    #remove-filters {
+      justify-self: flex-end;
+      width: 132px;
+      height: 38px;
+    }
   }
 }

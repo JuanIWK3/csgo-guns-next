@@ -170,7 +170,7 @@ const Home: NextPage<{ guns: Gun[] }> = ({ guns }) => {
               })}
             </Dropdown.Menu>
           </Dropdown>
-          {/* <Dropdown className="dropdown">
+          <Dropdown className="dropdown">
             <Dropdown.Toggle variant="dark" id="dropdown-basic">
               {priceDrop}
             </Dropdown.Toggle>
@@ -197,7 +197,7 @@ const Home: NextPage<{ guns: Gun[] }> = ({ guns }) => {
                 </label>
               </Dropdown.Item>
             </Dropdown.Menu>
-          </Dropdown> */}
+          </Dropdown>
         </div>
         <div className="filter-buttons">
           <Button

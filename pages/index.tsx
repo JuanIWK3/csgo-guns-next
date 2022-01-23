@@ -2,59 +2,155 @@ import type { GetStaticProps, NextPage } from "next";
 import Head from "next/head";
 import { SyntheticEvent, useRef, useState } from "react";
 
+import sectionSvg from "../images/section.svg";
+
 import styles from "../styles/Home.module.css";
+
 import "bootswatch/dist/darkly/bootstrap.min.css";
 import { Button, Dropdown, Form, FormControl, Table } from "react-bootstrap";
 
 import { Gun } from "../types";
 
-interface IFilters {
-  type: string;
-  side: string;
-}
-
 const Home: NextPage<{ guns: Gun[] }> = ({ guns }) => {
-  const [filteredGuns, setFilteredGuns] = useState<Gun[]>(guns);
-  const [price, setPrice] = useState(200);
-  const [typeDrop, setTypeDrop] = useState("Types");
-  const [sideDrop, setSideDrop] = useState("Sides");
-  const [priceDrop, setPriceDrop] = useState("Price");
-  const [filters, setFilters] = useState<IFilters>({ type: "", side: "" });
-  const allGuns = guns;
+  const [selectedGun, setSelectedGun] = useState({
+    id: "c26ac014-f606-4da1-9aa4-3e4ce1d584e3",
+    name: "XM1014",
+    ammo: "7/32",
+    killAward: "900(300%)",
+    damage: 120,
+    firerate: 2,
+    recoilControl: 1,
+    accurateRange: "3m",
+    armorPenetration: 160,
+    type: "HEAVY",
+    side: "TERRORISTS & COUNTER-TERRORISTS",
+    price: 2000,
+    picture:
+      "https://static.wikia.nocookie.net/cswikia/images/3/37/CSGO_XM1014_Inventory.png",
+    created_at: "2022-01-18T19:20:57.104Z",
+    updated_at: "2022-01-20T18:22:35.707Z",
+  });
+  const sixGuns = [
+    {
+      id: "f53e8954-0457-487b-aaeb-59788299118d",
+      name: "SAWED-OFF",
+      ammo: "7/32",
+      killAward: "900(300%)",
+      damage: 256,
+      firerate: 1,
+      recoilControl: 1,
+      accurateRange: "2m",
+      armorPenetration: 150,
+      type: "HEAVY",
+      side: "TERRORISTS",
+      price: 1100,
+      picture:
+        "https://static.wikia.nocookie.net/cswikia/images/b/b4/CSGO_Sawed-Off_Inventory.png/revision/latest?cb=20130813200706",
+      created_at: "2022-01-18T19:22:42.965Z",
+      updated_at: "2022-01-20T18:21:01.867Z",
+    },
+    {
+      id: "c26ac014-f606-4da1-9aa4-3e4ce1d584e3",
+      name: "XM1014",
+      ammo: "7/32",
+      killAward: "900(300%)",
+      damage: 120,
+      firerate: 2,
+      recoilControl: 1,
+      accurateRange: "3m",
+      armorPenetration: 160,
+      type: "HEAVY",
+      side: "TERRORISTS & COUNTER-TERRORISTS",
+      price: 2000,
+      picture:
+        "https://static.wikia.nocookie.net/cswikia/images/3/37/CSGO_XM1014_Inventory.png/revision/latest?cb=20130813200959",
+      created_at: "2022-01-18T19:20:57.104Z",
+      updated_at: "2022-01-20T18:22:35.707Z",
+    },
+    {
+      id: "708c201c-7c83-47b2-9186-8579ae728211",
+      name: "MAG-7",
+      ammo: "5/32",
+      killAward: "900(300%)",
+      damage: 240,
+      firerate: 1,
+      recoilControl: 1,
+      accurateRange: "3m",
+      armorPenetration: 150,
+      type: "HEAVY",
+      side: "COUNTER-TERRORISTS",
+      price: 1300,
+      picture:
+        "https://static.wikia.nocookie.net/cswikia/images/d/d4/CSGO_MAG-7_Inventory.png/revision/latest?cb=20130813200441",
+      created_at: "2022-01-18T19:44:14.198Z",
+      updated_at: "2022-01-20T18:32:31.258Z",
+    },
+    {
+      id: "70762141-3899-4bc4-b18d-ecb635c2ea78",
+      name: "M249",
+      ammo: "100/200",
+      killAward: "300(100%)",
+      damage: 32,
+      firerate: 12,
+      recoilControl: 72,
+      accurateRange: "17m",
+      armorPenetration: 160,
+      type: "HEAVY",
+      side: "TERRORISTS & COUNTER-TERRORISTS",
+      price: 5200,
+      picture:
+        "https://static.wikia.nocookie.net/cswikia/images/7/7c/CSGO_M249_Inventory.png/revision/latest?cb=20130813203106",
+      created_at: "2022-01-18T19:23:35.463Z",
+      updated_at: "2022-01-20T18:33:24.949Z",
+    },
+    {
+      id: "58c1fa72-d2d8-429b-ad67-ba715f49755e",
+      name: "NEGEV",
+      ammo: "150/300",
+      killAward: "300(100%)",
+      damage: 35,
+      firerate: 13,
+      recoilControl: 79,
+      accurateRange: "13m",
+      armorPenetration: 142,
+      type: "HEAVY",
+      side: "TERRORISTS & COUNTER-TERRORISTS",
+      price: 1700,
+      picture:
+        "https://static.wikia.nocookie.net/cswikia/images/0/03/CSGO_Negev_Inventory.png/revision/latest?cb=20130813203153",
+      created_at: "2022-01-18T19:24:21.355Z",
+      updated_at: "2022-01-20T18:34:05.367Z",
+    },
+    {
+      id: "2c637072-1357-4fae-b884-80ebacf8ea39",
+      name: "NOVA",
+      ammo: "8/32",
+      killAward: "900(300%)",
+      damage: 234,
+      firerate: 1,
+      recoilControl: 1,
+      accurateRange: "3m",
+      armorPenetration: 100,
+      type: "HEAVY",
+      side: "TERRORISTS & COUNTER-TERRORISTS",
+      price: 1050,
+      picture:
+        "https://static.wikia.nocookie.net/cswikia/images/1/11/CSGO_Nova_Inventory.png/revision/latest?cb=20130813200616",
+      created_at: "2022-01-18T19:20:09.751Z",
+      updated_at: "2022-01-20T18:34:43.967Z",
+    },
+  ];
   let gunTypes: string[] = [];
-  let gunSides: string[] = [];
 
-  for (let i = 0; i < allGuns.length; i++) {
-    gunTypes[i] = allGuns[i].type;
+  for (let i = 0; i < guns.length; i++) {
+    gunTypes[i] = guns[i].type;
   }
 
-  for (let i = 0; i < allGuns.length; i++) {
-    gunSides[i] = allGuns[i].side;
-  }
-
-  gunTypes = removeDuplicates(gunTypes);
-
-  gunSides = removeDuplicates(gunSides);
-
-  const applyFilters = () => {
-    console.log(filters);
-
-    setFilteredGuns(guns);
-
-    if (filters.type !== "") {
-      setFilteredGuns(guns.filter((gun) => gun.type === filters.type));
-    }
-
-    if (filters.side !== "") {
-      setFilteredGuns(guns.filter((gun) => gun.side === filters.side));
-    }
-
-    if (filters.side !== "" && filters.type !== "") {
-      setFilteredGuns(
-        guns.filter(
-          (gun) => gun.type === filters.type && gun.side === filters.side
-        )
-      );
+  const selectGun = (id: string) => {
+    for (let i = 0; i < sixGuns.length; i++) {
+      if (sixGuns[i].id === id) {
+        setSelectedGun(sixGuns[i]);
+      }
     }
   };
 
@@ -64,201 +160,86 @@ const Home: NextPage<{ guns: Gun[] }> = ({ guns }) => {
     return Array.from(it);
   }
 
-  const removeFilters = () => {
-    setFilteredGuns(guns);
-  };
-
-  const handleSearch = (e: HTMLInputElement) => {
-    const search = e.value;
-
-    const filterByName = (guns: Gun[], search: string) => {
-      return guns.filter((gun) =>
-        gun.name.toUpperCase().includes(search.toUpperCase())
-      );
-    };
-
-    setFilteredGuns(filterByName(allGuns, search));
-  };
+  gunTypes = removeDuplicates(gunTypes);
 
   return (
-    <div className={styles.container}>
-      <Head>
-        <title>CSGO Guns</title>
-        <meta name="description" content="Guns data" />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-      <FormControl
-        style={{
-          backgroundColor: "#222",
-          border: "1px solid #333",
-          color: "#fff",
-        }}
-        className="text-input"
-        placeholder="Search Guns"
-        type="text"
-        onChange={(e: SyntheticEvent) => {
-          handleSearch(e.currentTarget as HTMLInputElement);
-        }}
-      />
-      <div className="filters">
-        <div className="dropdowns">
-          <Dropdown className="dropdown">
-            <Dropdown.Toggle variant="dark" id="dropdown-basic">
-              {typeDrop}
-            </Dropdown.Toggle>
-
-            <Dropdown.Menu>
-              <Dropdown.Item
-                id=""
-                onClick={(e) => {
-                  setTypeDrop("All Types"),
-                    setFilters((prevState) => ({ ...prevState, type: "" }));
-                }}
-              >
-                All Types
-              </Dropdown.Item>
-              {gunTypes.map((type) => {
-                return (
-                  <>
-                    <Dropdown.Item
-                      id={type}
-                      onClick={(e) => {
-                        const { id } = e.currentTarget;
-                        setFilters((prevState) => ({ ...prevState, type: id }));
-                        setTypeDrop(id);
-                      }}
-                      key={type}
-                    >
-                      {type}
-                    </Dropdown.Item>
-                  </>
-                );
-              })}
-            </Dropdown.Menu>
-          </Dropdown>
-          <Dropdown className="dropdown">
-            <Dropdown.Toggle variant="dark" id="dropdown-basic">
-              {sideDrop}
-            </Dropdown.Toggle>
-
-            <Dropdown.Menu>
-              <Dropdown.Item
-                id=""
-                onClick={(e) => {
-                  setSideDrop("All Sides"),
-                    setFilters((prevState) => ({ ...prevState, side: "" }));
-                }}
-              >
-                All Sides
-              </Dropdown.Item>
-              {gunSides.map((side) => {
-                return (
-                  <>
-                    <Dropdown.Item
-                      id={side}
-                      onClick={(e) => {
-                        const { id } = e.currentTarget;
-                        setFilters((prevState) => ({ ...prevState, side: id }));
-                        setSideDrop(id);
-                      }}
-                      key={side}
-                    >
-                      {side}
-                    </Dropdown.Item>
-                  </>
-                );
-              })}
-            </Dropdown.Menu>
-          </Dropdown>
-          <Dropdown className="dropdown">
-            <Dropdown.Toggle variant="dark" id="dropdown-basic">
-              {priceDrop}
-            </Dropdown.Toggle>
-
-            <Dropdown.Menu>
-              <Dropdown.Item id="price-drop">
-                <FormControl
-                  id="price-range"
-                  type="range"
-                  min="200"
-                  max="5200"
-                  step="50"
-                  name="price"
-                  onChange={(e) => {
-                    console.log(e.currentTarget.value);
-                    setPrice(parseInt(e.currentTarget.value));
-                  }}
-                />
-                <label
-                  htmlFor="
-                price"
-                >
-                  {price}
-                </label>
-              </Dropdown.Item>
-            </Dropdown.Menu>
-          </Dropdown>
-        </div>
-        <div className="filter-buttons">
-          <Button
-            onClick={() => {
-              setFilteredGuns(guns);
-              applyFilters();
-            }}
-            id="apply-filters"
-            variant="success"
-          >
-            Apply Filters
-          </Button>
-          <Button
-            onClick={() => {
-              removeFilters();
-            }}
-            id="remove-filters"
-            variant="danger"
-          >
-            Remove Filters
-          </Button>
-        </div>
+    <div className="loadout-container">
+      <div className="title">
+        <h1>CSGO Guns</h1>
       </div>
-      <Table striped className="mt-2">
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>Type</th>
-            <th>Price</th>
-            <th>Kill Award</th>
-            <th>Ammo</th>
-            <th>Damage</th>
-            <th>Firerate</th>
-            <th>Recoil Control</th>
-            <th>Accurate Range</th>
-            <th>Armor Penetration</th>
-            <th>Side</th>
-          </tr>
-        </thead>
-        <tbody>
-          {filteredGuns.map((gun) => {
+      <div className="types">
+        {gunTypes.map((type) => {
+          return <button key={type}>{type}</button>;
+        })}
+      </div>
+
+      <div className="loadout">
+        <div className="circle">
+          {sixGuns.map((gun) => {
+            return (
+              <div
+                key={gun.id}
+                className="pie"
+                onClick={() => {
+                  selectGun(gun.id);
+                }}
+              >
+                <div className="pie-color"></div>
+                <h1>sucesso</h1>
+              </div>
+            );
+          })}
+
+          {sixGuns.map((gun) => {
             return (
               <>
-                <tr key={gun.id}>
-                  <td>{gun.name}</td>
-                  <td>{gun.type}</td>
-                  <td>{gun.price}</td>
-                  <td>{gun.killAward}</td>
-                  <td>{gun.ammo}</td>
-                  <td>{gun.damage}</td>
-                  <td>{gun.firerate}</td>
-                  <td>{gun.recoilControl}</td>
-                  <td>{gun.accurateRange}</td>
-                  <td>{gun.armorPenetration}</td>
-                  <td>{gun.side}</td>
-                </tr>
+                <p
+                  style={{ display: "flex", flexDirection: "column" }}
+                  key={gun.id}
+                  onClick={() => {
+                    selectGun(gun.id);
+                  }}
+                >
+                  {gun.name}
+                  <img
+                    style={{ height: "auto", width: "50px" }}
+                    src={selectedGun.picture}
+                    alt=""
+                  />
+                </p>
               </>
             );
           })}
-        </tbody>
-      </Table>
+        </div>
+      </div>
+      <div className="data">
+        <img src={selectedGun.picture} alt="" />
+        <p id="name">{selectedGun.name}</p>
+        <div className="data-item">
+          <p>Ammo</p>
+          <p>{selectedGun.ammo}</p>
+        </div>
+        <div className="data-item">
+          <p>Kill Award</p>
+          <p>{selectedGun.killAward}</p>
+        </div>
+        <div className="data-item">
+          <p>Firerate</p>
+          <p>{selectedGun.firerate}</p>
+        </div>
+        <div className="data-item">
+          <p>Recoil Control</p>
+          <p>{selectedGun.recoilControl}</p>
+        </div>
+        <div className="data-item">
+          <p>Accurate Range</p>
+          <p>{selectedGun.accurateRange}</p>
+        </div>
+        <div className="data-item">
+          <p>Armor Penetration</p>
+          <p>{selectedGun.accurateRange}</p>
+        </div>
+      </div>
     </div>
   );
 };

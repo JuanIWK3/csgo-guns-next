@@ -1,0 +1,215 @@
+$border: 1px solid #333;
+$circle-size: 300px;
+$background-color: rgb(26, 26, 26);
+
+.loadout-container {
+  margin: 0;
+  padding: 0px;
+  box-sizing: border-box;
+}
+
+.title {
+  border-bottom: $border;
+  width: 100%;
+  padding: 16px 0px 8px 24px;
+}
+
+.types {
+  border-bottom: $border;
+  width: 100%;
+
+  button:first-child {
+    padding-left: 24px;
+  }
+
+  button {
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background: none;
+    border: none;
+    color: white;
+    padding: 10px 16px 8px 16px;
+    border-bottom: 2px solid rgba(119, 119, 119, 0);
+
+    &:focus {
+      border-bottom: 2px solid rgb(230, 230, 230);
+    }
+  }
+}
+
+.loadout {
+  padding-top: 30px;
+  padding-bottom: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-right: $border;
+}
+
+.data {
+  padding: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+
+  #name {
+    border-bottom: 1px solid #333;
+    margin-bottom: 8px;
+    color: #0070f3;
+  }
+  .data-item {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+  }
+}
+
+.circle {
+  display: flex;
+  position: relative;
+
+  .background {
+    height: $circle-size;
+    width: $circle-size;
+  }
+}
+
+.pie {
+  background: rgb(0, 0, 0);
+  border-radius: 50%;
+
+  user-select: none; /* supported by Chrome and Opera */
+  -webkit-user-select: none; /* Safari */
+  -khtml-user-select: none; /* Konqueror HTML */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+
+  position: absolute;
+
+  cursor: pointer;
+  height: $circle-size;
+  width: $circle-size;
+}
+
+.pie-color {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  transition: all 0.2s linear;
+
+  &:hover {
+    opacity: 0.62;
+  }
+}
+
+.pie:nth-child(1) {
+  clip-path: polygon(50% 50%, 37% 100%, 100% 100%);
+  transform: rotate(165deg);
+}
+
+.pie-color:nth-child(1) {
+  background-color: $background-color;
+}
+
+.pie:nth-child(2) {
+  clip-path: polygon(50% 50%, 37% 100%, 100% 100%);
+  transform: rotate(225deg);
+}
+
+.pie-color:nth-child(2) {
+  background-color: $background-color;
+}
+
+.pie:nth-child(3) {
+  clip-path: polygon(50% 50%, 37% 100%, 100% 100%);
+  transform: rotate(285deg);
+}
+
+.pie-color:nth-child(3) {
+  background-color: $background-color;
+}
+
+.pie:nth-child(4) {
+  clip-path: polygon(50% 50%, 37% 100%, 100% 100%);
+  transform: rotate(-15deg);
+}
+
+.pie-color:nth-child(4) {
+  background-color: $background-color;
+}
+.pie:nth-child(5) {
+  clip-path: polygon(50% 50%, 37% 100%, 100% 100%);
+  transform: rotate(45deg);
+}
+
+.pie-color:nth-child(5) {
+  background-color: $background-color;
+}
+.pie:nth-child(6) {
+  clip-path: polygon(50% 50%, 37% 100%, 100% 100%);
+  transform: rotate(105deg);
+}
+
+.pie-color:nth-child(6) {
+  background-color: $background-color;
+}
+
+.circle {
+  position: relative;
+  width: $circle-size;
+  height: $circle-size;
+
+  p:hover {
+    cursor: pointer;
+    color: #0070f3;
+  }
+
+  p {
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    position: absolute;
+
+    border-radius: 50%;
+  }
+
+  p:nth-child(7) {
+    left: 60px;
+    top: 50px;
+
+    font-size: calc($circle-size / 25);
+  }
+  p:nth-child(8) {
+    left: 175px;
+    top: 50px;
+
+    font-size: calc($circle-size / 25);
+  }
+  p:nth-child(9) {
+    left: 220px;
+    top: 130px;
+
+    font-size: calc($circle-size / 25);
+  }
+  p:nth-child(10) {
+    left: 175px;
+    top: 220px;
+
+    font-size: calc($circle-size / 25);
+  }
+  p:nth-child(11) {
+    left: 75px;
+    top: 220px;
+
+    font-size: calc($circle-size / 25);
+  }
+  p:nth-child(12) {
+    left: 30px;
+    top: 130px;
+
+    font-size: calc($circle-size / 25);
+  }
+}

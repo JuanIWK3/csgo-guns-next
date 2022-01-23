@@ -1,0 +1,3 @@
+<svg className="item">
+              <circle fill="#fff" cx="100" cy="100" r="50"></circle>
+            </svg>

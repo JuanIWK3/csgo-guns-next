@@ -14,9 +14,25 @@ $background-color: rgb(26, 26, 26);
   padding: 16px 0px 8px 24px;
 }
 
-.types {
+.filters {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   border-bottom: $border;
   width: 100%;
+
+  .sides {
+    img {
+      height: 45px;
+      padding: 8px;
+      cursor: pointer;
+      border-bottom: 2px solid rgba(119, 119, 119, 0);
+    }
+
+    .selected {
+      border-bottom: 2px solid rgb(230, 230, 230);
+    }
+  }
 
   button:first-child {
     padding-left: 24px;
@@ -32,10 +48,9 @@ $background-color: rgb(26, 26, 26);
     color: white;
     padding: 10px 16px 8px 16px;
     border-bottom: 2px solid rgba(119, 119, 119, 0);
-
-    &:focus {
-      border-bottom: 2px solid rgb(230, 230, 230);
-    }
+  }
+  .selected {
+    border-bottom: 2px solid rgb(230, 230, 230);
   }
 }
 
@@ -162,54 +177,71 @@ $background-color: rgb(26, 26, 26);
   width: $circle-size;
   height: $circle-size;
 
-  p:hover {
-    cursor: pointer;
-    color: #0070f3;
-  }
+  .names-images {
+    position: relative;
+    width: $circle-size;
+    height: $circle-size;
 
-  p {
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    position: absolute;
+    p:hover {
+      cursor: pointer;
+      color: #0070f3;
+    }
 
-    border-radius: 50%;
-  }
+    p {
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      position: absolute;
 
-  p:nth-child(7) {
-    left: 60px;
-    top: 50px;
+      border-radius: 50%;
+    }
 
-    font-size: calc($circle-size / 25);
-  }
-  p:nth-child(8) {
-    left: 175px;
-    top: 50px;
+    p:nth-child(1) {
+      left: 60px;
+      top: 50px;
 
-    font-size: calc($circle-size / 25);
-  }
-  p:nth-child(9) {
-    left: 220px;
-    top: 130px;
+      font-size: calc($circle-size / 25);
+    }
+    p:nth-child(2) {
+      left: 175px;
+      top: 50px;
 
-    font-size: calc($circle-size / 25);
-  }
-  p:nth-child(10) {
-    left: 175px;
-    top: 220px;
+      font-size: calc($circle-size / 25);
+    }
+    p:nth-child(3) {
+      left: 220px;
+      top: 130px;
 
-    font-size: calc($circle-size / 25);
-  }
-  p:nth-child(11) {
-    left: 75px;
-    top: 220px;
+      font-size: calc($circle-size / 25);
+    }
+    p:nth-child(4) {
+      left: 175px;
+      top: 220px;
 
-    font-size: calc($circle-size / 25);
-  }
-  p:nth-child(12) {
-    left: 30px;
-    top: 130px;
+      font-size: calc($circle-size / 25);
+    }
+    p:nth-child(5) {
+      left: 75px;
+      top: 220px;
 
-    font-size: calc($circle-size / 25);
+      font-size: calc($circle-size / 25);
+    }
+    p:nth-child(6) {
+      left: 30px;
+      top: 130px;
+
+      font-size: calc($circle-size / 25);
+    }
+    p:nth-child(7) {
+      left: 110px;
+      top: 110px;
+      margin: 0;
+      background-color: rgb(24, 24, 24);
+      border: $border;
+      width: 80px;
+      height: 80px;
+
+      font-size: calc($circle-size / 25);
+    }
   }
 }

@@ -12,6 +12,9 @@ import { Button, Dropdown, Form, FormControl, Table } from "react-bootstrap";
 import { Gun } from "../types";
 
 const Home: NextPage<{ guns: Gun[] }> = ({ guns }) => {
+  const [string, setString] = useState(
+    "https://static.wikia.nocookie.net/cswikia/images/3/37/CSGO_XM1014_Inventory.png/revision/latest?cb=20130813200959"
+  );
   const [selectedGun, setSelectedGun] = useState({
     id: "c26ac014-f606-4da1-9aa4-3e4ce1d584e3",
     name: "XM1014",
@@ -154,6 +157,11 @@ const Home: NextPage<{ guns: Gun[] }> = ({ guns }) => {
     }
   };
 
+  const splitFunction = (url: string) => {
+    let word = url.split(".png");
+    return word[0] + ".png";
+  };
+
   function removeDuplicates(arr: string[]) {
     let s = new Set(arr);
     let it = s.values();
@@ -203,7 +211,7 @@ const Home: NextPage<{ guns: Gun[] }> = ({ guns }) => {
                   {gun.name}
                   <img
                     style={{ height: "auto", width: "50px" }}
-                    src={selectedGun.picture}
+                    src={splitFunction(gun.picture)}
                     alt=""
                   />
                 </p>
@@ -213,7 +221,7 @@ const Home: NextPage<{ guns: Gun[] }> = ({ guns }) => {
         </div>
       </div>
       <div className="data">
-        <img src={selectedGun.picture} alt="" />
+        <img src={splitFunction(selectedGun.picture)} alt="" />
         <p id="name">{selectedGun.name}</p>
         <div className="data-item">
           <p>Ammo</p>
@@ -237,7 +245,10 @@ const Home: NextPage<{ guns: Gun[] }> = ({ guns }) => {
         </div>
         <div className="data-item">
           <p>Armor Penetration</p>
-          <p>{selectedGun.accurateRange}</p>
+          <p>{selectedGun.armorPenetration}</p>
+        </div>
+        <div className="data-item">
+          <p>{string}</p>
         </div>
       </div>
     </div>

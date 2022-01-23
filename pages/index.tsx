@@ -247,9 +247,6 @@ const Home: NextPage<{ guns: Gun[] }> = ({ guns }) => {
           <p>Armor Penetration</p>
           <p>{selectedGun.armorPenetration}</p>
         </div>
-        <div className="data-item">
-          <p>{string}</p>
-        </div>
       </div>
     </div>
   );

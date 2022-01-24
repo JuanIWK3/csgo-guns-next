@@ -1,247 +1,350 @@
 $border: 1px solid #333;
-$circle-size: 300px;
-$background-color: rgb(26, 26, 26);
+$circle-size: 80vw;
+$circle-size2: 600px;
+$background-color: rgba(0, 0, 0, 0.233);
 
 .loadout-container {
   margin: 0;
   padding: 0px;
   box-sizing: border-box;
-}
+  .title {
+    border-bottom: $border;
+    width: 100%;
+    padding: 16px 0px 8px 24px;
+  }
 
-.title {
-  border-bottom: $border;
-  width: 100%;
-  padding: 16px 0px 8px 24px;
-}
+  .filters {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: $border;
+    width: 100%;
 
-.filters {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  border-bottom: $border;
-  width: 100%;
+    .sides {
+      img {
+        height: 45px;
+        padding: 8px;
+        cursor: pointer;
+        border-bottom: 2px solid rgba(119, 119, 119, 0);
+      }
 
-  .sides {
-    img {
-      height: 45px;
-      padding: 8px;
-      cursor: pointer;
-      border-bottom: 2px solid rgba(119, 119, 119, 0);
+      .selected {
+        border-bottom: 2px solid rgb(230, 230, 230);
+      }
     }
 
+    button:first-child {
+      padding-left: 24px;
+    }
+
+    button {
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      background: none;
+      border: none;
+      color: white;
+      padding: 10px 16px 8px 16px;
+      border-bottom: 2px solid rgba(119, 119, 119, 0);
+    }
     .selected {
       border-bottom: 2px solid rgb(230, 230, 230);
     }
   }
 
-  button:first-child {
-    padding-left: 24px;
-  }
-
-  button {
-    flex-direction: row;
+  .loadout {
+    padding-top: 30px;
+    padding-bottom: 30px;
+    display: flex;
     align-items: center;
     justify-content: center;
-    text-align: center;
-    background: none;
-    border: none;
-    color: white;
-    padding: 10px 16px 8px 16px;
-    border-bottom: 2px solid rgba(119, 119, 119, 0);
   }
-  .selected {
-    border-bottom: 2px solid rgb(230, 230, 230);
-  }
-}
 
-.loadout {
-  padding-top: 30px;
-  padding-bottom: 30px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-right: $border;
-}
-
-.data {
-  padding: 24px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-
-  #name {
-    border-bottom: 1px solid #333;
-    margin-bottom: 8px;
-    color: #0070f3;
-  }
-  .data-item {
+  .data {
+    padding: 24px;
     display: flex;
-    justify-content: space-between;
-    width: 100%;
-  }
-}
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
 
-.circle {
-  display: flex;
-  position: relative;
-
-  .background {
-    height: $circle-size;
-    width: $circle-size;
-  }
-}
-
-.pie {
-  background: rgb(0, 0, 0);
-  border-radius: 50%;
-
-  user-select: none; /* supported by Chrome and Opera */
-  -webkit-user-select: none; /* Safari */
-  -khtml-user-select: none; /* Konqueror HTML */
-  -moz-user-select: none; /* Firefox */
-  -ms-user-select: none; /* Internet Explorer/Edge */
-
-  position: absolute;
-
-  cursor: pointer;
-  height: $circle-size;
-  width: $circle-size;
-}
-
-.pie-color {
-  width: 100%;
-  height: 100%;
-  border-radius: 50%;
-  transition: all 0.2s linear;
-
-  &:hover {
-    opacity: 0.62;
-  }
-}
-
-.pie:nth-child(1) {
-  clip-path: polygon(50% 50%, 37% 100%, 100% 100%);
-  transform: rotate(165deg);
-}
-
-.pie-color:nth-child(1) {
-  background-color: $background-color;
-}
-
-.pie:nth-child(2) {
-  clip-path: polygon(50% 50%, 37% 100%, 100% 100%);
-  transform: rotate(225deg);
-}
-
-.pie-color:nth-child(2) {
-  background-color: $background-color;
-}
-
-.pie:nth-child(3) {
-  clip-path: polygon(50% 50%, 37% 100%, 100% 100%);
-  transform: rotate(285deg);
-}
-
-.pie-color:nth-child(3) {
-  background-color: $background-color;
-}
-
-.pie:nth-child(4) {
-  clip-path: polygon(50% 50%, 37% 100%, 100% 100%);
-  transform: rotate(-15deg);
-}
-
-.pie-color:nth-child(4) {
-  background-color: $background-color;
-}
-.pie:nth-child(5) {
-  clip-path: polygon(50% 50%, 37% 100%, 100% 100%);
-  transform: rotate(45deg);
-}
-
-.pie-color:nth-child(5) {
-  background-color: $background-color;
-}
-.pie:nth-child(6) {
-  clip-path: polygon(50% 50%, 37% 100%, 100% 100%);
-  transform: rotate(105deg);
-}
-
-.pie-color:nth-child(6) {
-  background-color: $background-color;
-}
-
-.circle {
-  position: relative;
-  width: $circle-size;
-  height: $circle-size;
-
-  .names-images {
-    position: relative;
-    width: $circle-size;
-    height: $circle-size;
-
-    p:hover {
-      cursor: pointer;
+    #name {
+      border-bottom: 1px solid #444;
+      margin-bottom: 8px;
       color: #0070f3;
     }
+    .data-item {
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+    }
+  }
 
-    p {
+  .circle {
+    display: flex;
+    position: relative;
+
+    .background {
+      height: $circle-size;
+      width: $circle-size;
+
+      @media only screen and (min-width: 900px) {
+        height: $circle-size2;
+        width: $circle-size2;
+      }
+    }
+  }
+
+  .pie {
+    background: rgba(0, 0, 0, 0);
+    border-radius: 50%;
+
+    user-select: none; /* supported by Chrome and Opera */
+    -webkit-user-select: none; /* Safari */
+    -khtml-user-select: none; /* Konqueror HTML */
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* Internet Explorer/Edge */
+
+    position: absolute;
+
+    cursor: pointer;
+
+    height: $circle-size;
+    width: $circle-size;
+
+    @media only screen and (min-width: 900px) {
+      height: $circle-size2;
+      width: $circle-size2;
+    }
+  }
+
+  .pie-color {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    transition: all 0.2s linear;
+
+    &:hover {
+      opacity: 0.62;
+    }
+  }
+
+  .pie:nth-child(1) {
+    clip-path: polygon(50% 50%, 37% 100%, 100% 100%);
+    transform: rotate(165deg);
+  }
+
+  .pie-color:nth-child(1) {
+    background-color: $background-color;
+  }
+
+  .pie:nth-child(2) {
+    clip-path: polygon(50% 50%, 37% 100%, 100% 100%);
+    transform: rotate(225deg);
+  }
+
+  .pie-color:nth-child(2) {
+    background-color: $background-color;
+  }
+
+  .pie:nth-child(3) {
+    clip-path: polygon(50% 50%, 37% 100%, 100% 100%);
+    transform: rotate(285deg);
+  }
+
+  .pie-color:nth-child(3) {
+    background-color: $background-color;
+  }
+
+  .pie:nth-child(4) {
+    clip-path: polygon(50% 50%, 37% 100%, 100% 100%);
+    transform: rotate(-15deg);
+  }
+
+  .pie-color:nth-child(4) {
+    background-color: $background-color;
+  }
+  .pie:nth-child(5) {
+    clip-path: polygon(50% 50%, 37% 100%, 100% 100%);
+    transform: rotate(45deg);
+  }
+
+  .pie-color:nth-child(5) {
+    background-color: $background-color;
+  }
+  .pie:nth-child(6) {
+    clip-path: polygon(50% 50%, 37% 100%, 100% 100%);
+    transform: rotate(105deg);
+  }
+
+  .pie-color:nth-child(6) {
+    background-color: $background-color;
+  }
+
+  .circle {
+    position: relative;
+
+    width: $circle-size;
+    height: $circle-size;
+
+    @media only screen and (min-width: 900px) {
+      height: $circle-size2;
+      width: $circle-size2;
+    }
+
+    #extra-gun {
+      left: calc($circle-size * 0.365);
+      top: calc($circle-size * 0.36);
+      margin: 0;
+      background-color: rgb(24, 24, 24);
+      border: $border;
+      border-radius: 50%;
+      width: calc($circle-size * 0.26);
+      height: calc($circle-size * 0.26);
+      z-index: 2;
       align-items: center;
       justify-content: center;
       text-align: center;
       position: absolute;
+      font-size: calc($circle-size / 25);
+      cursor: pointer;
 
-      border-radius: 50%;
+      @media only screen and (min-width: 900px) {
+        left: calc($circle-size2 * 0.365);
+        top: calc($circle-size2 * 0.36);
+        width: calc($circle-size2 * 0.26);
+        height: calc($circle-size2 * 0.26);
+        font-size: calc($circle-size2 / 25);
+      }
+
+      img {
+        height: auto;
+        width: calc($circle-size * 0.16);
+
+        @media only screen and (min-width: 900px) {
+          width: calc($circle-size2 * 0.16);
+        }
+      }
     }
 
-    p:nth-child(1) {
-      left: 60px;
-      top: 50px;
+    .names-images {
+      position: relative;
 
-      font-size: calc($circle-size / 25);
+      width: $circle-size;
+      height: $circle-size;
+
+      z-index: -1;
+
+      @media only screen and (min-width: 900px) {
+        height: $circle-size2;
+        width: $circle-size2;
+      }
+
+      p:hover {
+        cursor: pointer;
+        color: #0070f3;
+      }
+
+      p {
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        position: absolute;
+
+        border-radius: 50%;
+
+        img {
+          height: auto;
+          width: calc($circle-size * 0.16);
+
+          @media only screen and (min-width: 900px) {
+            width: calc($circle-size2 * 0.16);
+          }
+        }
+      }
+
+      p:nth-child(1) {
+        left: calc($circle-size * 0.2);
+        top: calc($circle-size * 0.16);
+        font-size: calc($circle-size / 25);
+
+        @media only screen and (min-width: 900px) {
+          left: calc($circle-size2 * 0.2);
+          top: calc($circle-size2 * 0.16);
+          font-size: calc($circle-size2 / 25);
+        }
+      }
+      p:nth-child(2) {
+        left: calc($circle-size * 0.58);
+        top: calc($circle-size * 0.16);
+        font-size: calc($circle-size / 25);
+
+        @media only screen and (min-width: 900px) {
+          left: calc($circle-size2 * 0.58);
+          top: calc($circle-size2 * 0.16);
+          font-size: calc($circle-size2 / 25);
+        }
+      }
+      p:nth-child(3) {
+        left: calc($circle-size * 0.76);
+        top: calc($circle-size * 0.43);
+        font-size: calc($circle-size / 25);
+
+        @media only screen and (min-width: 900px) {
+          left: calc($circle-size2 * 0.76);
+          top: calc($circle-size2 * 0.43);
+          font-size: calc($circle-size2 / 25);
+        }
+      }
+      p:nth-child(4) {
+        left: calc($circle-size * 0.58);
+        top: calc($circle-size * 0.73);
+        font-size: calc($circle-size / 25);
+
+        @media only screen and (min-width: 900px) {
+          left: calc($circle-size2 * 0.58);
+          top: calc($circle-size2 * 0.73);
+          font-size: calc($circle-size2 / 25);
+        }
+      }
+      p:nth-child(5) {
+        left: calc($circle-size * 0.25);
+        top: calc($circle-size * 0.73);
+        font-size: calc($circle-size / 25);
+
+        @media only screen and (min-width: 900px) {
+          left: calc($circle-size2 * 0.25);
+          top: calc($circle-size2 * 0.73);
+          font-size: calc($circle-size2 / 25);
+        }
+      }
+      p:nth-child(6) {
+        left: calc($circle-size * 0.1);
+        top: calc($circle-size * 0.43);
+        font-size: calc($circle-size / 25);
+
+        @media only screen and (min-width: 900px) {
+          left: calc($circle-size2 * 0.1);
+          top: calc($circle-size2 * 0.43);
+          font-size: calc($circle-size2 / 25);
+        }
+      }
     }
-    p:nth-child(2) {
-      left: 175px;
-      top: 50px;
+  }
 
-      font-size: calc($circle-size / 25);
-    }
-    p:nth-child(3) {
-      left: 220px;
-      top: 130px;
+  .loadout-data {
+    @media only screen and (min-width: 900px) {
+      display: flex;
 
-      font-size: calc($circle-size / 25);
-    }
-    p:nth-child(4) {
-      left: 175px;
-      top: 220px;
+      .loadout {
+        flex: 4;
+        padding-top: 100px;
+        padding-bottom: 100px;
+      }
 
-      font-size: calc($circle-size / 25);
-    }
-    p:nth-child(5) {
-      left: 75px;
-      top: 220px;
-
-      font-size: calc($circle-size / 25);
-    }
-    p:nth-child(6) {
-      left: 30px;
-      top: 130px;
-
-      font-size: calc($circle-size / 25);
-    }
-    p:nth-child(7) {
-      left: 110px;
-      top: 110px;
-      margin: 0;
-      background-color: rgb(24, 24, 24);
-      border: $border;
-      width: 80px;
-      height: 80px;
-
-      font-size: calc($circle-size / 25);
+      .data {
+        flex: 3;
+      }
     }
   }
 }

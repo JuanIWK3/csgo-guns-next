@@ -114,41 +114,38 @@ const Home: NextPage<{ guns: Gun[] }> = ({ guns }) => {
           />
         </div>
       </div>
-
-      <div className="loadout">
-        <div className="circle">
-          {sixGuns.map((gun) => {
-            return (
-              <div
-                key={gun.id}
-                className="pie"
-                onClick={() => {
-                  selectGun(gun.id);
-                }}
-              >
-                <div className="pie-color"></div>
-              </div>
-            );
-          })}
-          <div className="names-images">
+      <div className="loadout-data">
+        <div className="loadout">
+          <div className="circle">
             {sixGuns.map((gun) => {
               return (
-                <p
-                  style={{ display: "flex", flexDirection: "column" }}
+                <div
                   key={gun.id}
+                  className="pie"
                   onClick={() => {
                     selectGun(gun.id);
                   }}
                 >
-                  {gun.name}
-                  <img
-                    style={{ height: "auto", width: "50px" }}
-                    src={splitFunction(gun.picture)}
-                    alt=""
-                  />
-                </p>
+                  <div className="pie-color"></div>
+                </div>
               );
             })}
+            <div className="names-images">
+              {sixGuns.map((gun) => {
+                return (
+                  <p
+                    style={{ display: "flex", flexDirection: "column" }}
+                    key={gun.id}
+                    onClick={() => {
+                      selectGun(gun.id);
+                    }}
+                  >
+                    {gun.name}
+                    <img src={splitFunction(gun.picture)} alt="" />
+                  </p>
+                );
+              })}
+            </div>
             {extraGun && (
               <p
                 id="extra-gun"
@@ -158,42 +155,38 @@ const Home: NextPage<{ guns: Gun[] }> = ({ guns }) => {
                 }}
               >
                 {extraGun.name}
-                <img
-                  style={{ height: "auto", width: "50px" }}
-                  src={splitFunction(extraGun.picture)}
-                  alt=""
-                />
+                <img src={splitFunction(extraGun.picture)} alt="" />
               </p>
             )}
           </div>
         </div>
-      </div>
-      <div className="data">
-        <img src={splitFunction(selectedGun.picture)} alt="" />
-        <p id="name">{selectedGun.name}</p>
-        <div className="data-item">
-          <p>Ammo</p>
-          <p>{selectedGun.ammo}</p>
-        </div>
-        <div className="data-item">
-          <p>Kill Award</p>
-          <p>{selectedGun.killAward}</p>
-        </div>
-        <div className="data-item">
-          <p>Firerate</p>
-          <p>{selectedGun.firerate}</p>
-        </div>
-        <div className="data-item">
-          <p>Recoil Control</p>
-          <p>{selectedGun.recoilControl}</p>
-        </div>
-        <div className="data-item">
-          <p>Accurate Range</p>
-          <p>{selectedGun.accurateRange}</p>
-        </div>
-        <div className="data-item">
-          <p>Armor Penetration</p>
-          <p>{selectedGun.armorPenetration}</p>
+        <div className="data">
+          <img src={splitFunction(selectedGun.picture)} alt="" />
+          <p id="name">{selectedGun.name}</p>
+          <div className="data-item">
+            <p>Ammo</p>
+            <p>{selectedGun.ammo}</p>
+          </div>
+          <div className="data-item">
+            <p>Kill Award</p>
+            <p>{selectedGun.killAward}</p>
+          </div>
+          <div className="data-item">
+            <p>Firerate</p>
+            <p>{selectedGun.firerate}</p>
+          </div>
+          <div className="data-item">
+            <p>Recoil Control</p>
+            <p>{selectedGun.recoilControl}</p>
+          </div>
+          <div className="data-item">
+            <p>Accurate Range</p>
+            <p>{selectedGun.accurateRange}</p>
+          </div>
+          <div className="data-item">
+            <p>Armor Penetration</p>
+            <p>{selectedGun.armorPenetration}</p>
+          </div>
         </div>
       </div>
     </div>

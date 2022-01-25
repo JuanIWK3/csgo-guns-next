@@ -3,7 +3,6 @@ body {
   padding: 0;
   margin: 0;
   height: 100%;
-  width: 100vw;
 
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
@@ -11,7 +10,6 @@ body {
 
 #__next {
   height: 100vh;
-  width: 100vw;
 }
 
 a {
@@ -25,12 +23,32 @@ a {
   padding: 0;
 }
 
-.text-input {
-  color: rgb(255, 255, 255);
-  background-color: #222;
-  border: 1px solid #333;
-  margin: 16px 0 8px 0;
-  text-align: center;
+.search {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 8px;
+  margin-bottom: 8px;
+
+  button {
+    border-radius: 0.3rem;
+    padding: 6px;
+    background-color: #222;
+    color: #0070f3;
+    transition: all 0.2s linear;
+    border: 1px solid #0070f3;
+    margin-right: 8px;
+    &:hover {
+      background-color: rgb(29, 29, 29);
+    }
+  }
+
+  .text-input {
+    color: rgb(255, 255, 255);
+    background-color: #222;
+    border: 1px solid #333;
+    text-align: center;
+  }
 }
 
 .filters {
@@ -56,19 +74,6 @@ a {
 
     #dropdown-basic {
       margin: 4px;
-    }
-
-    #apply-filters {
-      justify-self: flex-end;
-      width: 115px;
-      height: 38px;
-      margin-right: 8px;
-    }
-
-    #remove-filters {
-      justify-self: flex-end;
-      width: 132px;
-      height: 38px;
     }
   }
 }

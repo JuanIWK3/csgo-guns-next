@@ -6,6 +6,9 @@ import styles from "../styles/Home.module.css";
 import "bootswatch/dist/darkly/bootstrap.min.css";
 
 import { Gun } from "../types";
+import Link from "next/link";
+import { Button } from "react-bootstrap";
+import Head from "next/head";
 
 const Home: NextPage<{ guns: Gun[] }> = ({ guns }) => {
   //* ====================== Use State======================
@@ -74,8 +77,18 @@ const Home: NextPage<{ guns: Gun[] }> = ({ guns }) => {
 
   return (
     <div className="loadout-container">
+      <Head>
+        <title>CSGO Guns</title>
+        <meta name="description" content="Guns data" />
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
       <div className="title">
         <h1>CSGO Guns</h1>
+        <Link href="/table">
+          <a>
+            <button>Table</button>
+          </a>
+        </Link>
       </div>
       <div className="filters">
         <div className="types">

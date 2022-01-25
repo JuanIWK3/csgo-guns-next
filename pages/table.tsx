@@ -1,25 +1,22 @@
 import type { GetStaticProps, NextPage } from "next";
 import Head from "next/head";
-import { SyntheticEvent, useRef, useState } from "react";
+import { SyntheticEvent, useEffect, useRef, useState } from "react";
 
 import styles from "../styles/Home.module.css";
 import "bootswatch/dist/darkly/bootstrap.min.css";
 import { Button, Dropdown, Form, FormControl, Table } from "react-bootstrap";
 
 import { Gun } from "../types";
-
-interface IFilters {
-  type: string;
-  side: string;
-}
+import Link from "next/link";
 
 const Home: NextPage<{ guns: Gun[] }> = ({ guns }) => {
   const [filteredGuns, setFilteredGuns] = useState<Gun[]>(guns);
+  const [filterSide, setFilterSide] = useState("TERRORISTS");
+  const [filterType, setFilterType] = useState("");
   const [price, setPrice] = useState(200);
   const [typeDrop, setTypeDrop] = useState("Types");
   const [sideDrop, setSideDrop] = useState("Sides");
   const [priceDrop, setPriceDrop] = useState("Price");
-  const [filters, setFilters] = useState<IFilters>({ type: "", side: "" });
   const allGuns = guns;
   let gunTypes: string[] = [];
   let gunSides: string[] = [];
@@ -36,26 +33,30 @@ const Home: NextPage<{ guns: Gun[] }> = ({ guns }) => {
 
   gunSides = removeDuplicates(gunSides);
 
-  const applyFilters = () => {
-    console.log(filters);
+  useEffect(() => {
+    filterGuns();
+  }, [filterSide, filterType]);
 
-    setFilteredGuns(guns);
+  const filterGuns = () => {
+    let temp = guns;
 
-    if (filters.type !== "") {
-      setFilteredGuns(guns.filter((gun) => gun.type === filters.type));
+    if (filterType != "") {
+      temp = guns.filter((gun) => gun.type === filterType);
     }
 
-    if (filters.side !== "") {
-      setFilteredGuns(guns.filter((gun) => gun.side === filters.side));
+    if (filterSide != "") {
+      if (filterSide === "TERRORISTS") {
+        temp = temp.filter((gun) => gun.side.includes(filterSide));
+        temp = temp.filter((gun) => !(gun.side.length == 18));
+      }
+      if (filterSide === "COUNTER-TERRORISTS") {
+        temp = temp.filter((gun) => gun.side.includes(filterSide));
+        temp = temp.filter((gun) => !(gun.side.length == 10));
+      }
     }
 
-    if (filters.side !== "" && filters.type !== "") {
-      setFilteredGuns(
-        guns.filter(
-          (gun) => gun.type === filters.type && gun.side === filters.side
-        )
-      );
-    }
+    console.log(temp);
+    setFilteredGuns(temp);
   };
 
   function removeDuplicates(arr: string[]) {
@@ -87,19 +88,26 @@ const Home: NextPage<{ guns: Gun[] }> = ({ guns }) => {
         <meta name="description" content="Guns data" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <FormControl
-        style={{
-          backgroundColor: "#222",
-          border: "1px solid #333",
-          color: "#fff",
-        }}
-        className="text-input"
-        placeholder="Search Guns"
-        type="text"
-        onChange={(e: SyntheticEvent) => {
-          handleSearch(e.currentTarget as HTMLInputElement);
-        }}
-      />
+      <div className="search">
+        <Link href="/">
+          <a>
+            <button>Back</button>
+          </a>
+        </Link>
+        <FormControl
+          style={{
+            backgroundColor: "#222",
+            border: "1px solid #333",
+            color: "#fff",
+          }}
+          className="text-input"
+          placeholder="Search Guns"
+          type="text"
+          onChange={(e: SyntheticEvent) => {
+            handleSearch(e.currentTarget as HTMLInputElement);
+          }}
+        />
+      </div>
       <div className="filters">
         <div className="dropdowns">
           <Dropdown className="dropdown">
@@ -111,8 +119,7 @@ const Home: NextPage<{ guns: Gun[] }> = ({ guns }) => {
               <Dropdown.Item
                 id=""
                 onClick={(e) => {
-                  setTypeDrop("All Types"),
-                    setFilters((prevState) => ({ ...prevState, type: "" }));
+                  setTypeDrop("All Types"), setFilterType("");
                 }}
               >
                 All Types
@@ -124,7 +131,7 @@ const Home: NextPage<{ guns: Gun[] }> = ({ guns }) => {
                       id={type}
                       onClick={(e) => {
                         const { id } = e.currentTarget;
-                        setFilters((prevState) => ({ ...prevState, type: id }));
+                        setFilterType(id);
                         setTypeDrop(id);
                       }}
                       key={type}
@@ -145,8 +152,7 @@ const Home: NextPage<{ guns: Gun[] }> = ({ guns }) => {
               <Dropdown.Item
                 id=""
                 onClick={(e) => {
-                  setSideDrop("All Sides"),
-                    setFilters((prevState) => ({ ...prevState, side: "" }));
+                  setSideDrop("All Sides"), setFilterSide("");
                 }}
               >
                 All Sides
@@ -158,7 +164,7 @@ const Home: NextPage<{ guns: Gun[] }> = ({ guns }) => {
                       id={side}
                       onClick={(e) => {
                         const { id } = e.currentTarget;
-                        setFilters((prevState) => ({ ...prevState, side: id }));
+                        setFilterSide(id);
                         setSideDrop(id);
                       }}
                       key={side}
@@ -170,55 +176,6 @@ const Home: NextPage<{ guns: Gun[] }> = ({ guns }) => {
               })}
             </Dropdown.Menu>
           </Dropdown>
-          <Dropdown className="dropdown">
-            <Dropdown.Toggle variant="dark" id="dropdown-basic">
-              {priceDrop}
-            </Dropdown.Toggle>
-
-            <Dropdown.Menu>
-              <Dropdown.Item id="price-drop">
-                <FormControl
-                  id="price-range"
-                  type="range"
-                  min="200"
-                  max="5200"
-                  step="50"
-                  name="price"
-                  onChange={(e) => {
-                    console.log(e.currentTarget.value);
-                    setPrice(parseInt(e.currentTarget.value));
-                  }}
-                />
-                <label
-                  htmlFor="
-                price"
-                >
-                  {price}
-                </label>
-              </Dropdown.Item>
-            </Dropdown.Menu>
-          </Dropdown>
-        </div>
-        <div className="filter-buttons">
-          <Button
-            onClick={() => {
-              setFilteredGuns(guns);
-              applyFilters();
-            }}
-            id="apply-filters"
-            variant="success"
-          >
-            Apply Filters
-          </Button>
-          <Button
-            onClick={() => {
-              removeFilters();
-            }}
-            id="remove-filters"
-            variant="danger"
-          >
-            Remove Filters
-          </Button>
         </div>
       </div>
       <Table striped className="mt-2">

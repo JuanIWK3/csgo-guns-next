@@ -8,9 +8,24 @@ $background-color: rgba(0, 0, 0, 0.233);
   padding: 0px;
   box-sizing: border-box;
   .title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     border-bottom: $border;
     width: 100%;
-    padding: 16px 0px 8px 24px;
+    padding: 16px 24px 8px 24px;
+
+    button {
+      border-radius: 0.3rem;
+      padding: 8px;
+      background-color: #222;
+      color: #0070f3;
+      transition: all 0.2s linear;
+      border: 1px solid #0070f3;
+      &:hover {
+        background-color: rgb(29, 29, 29);
+      }
+    }
   }
 
   .filters {
@@ -19,6 +34,7 @@ $background-color: rgba(0, 0, 0, 0.233);
     justify-content: space-between;
     border-bottom: $border;
     width: 100%;
+    font-size: 0.8rem;
 
     .sides {
       img {
@@ -33,10 +49,6 @@ $background-color: rgba(0, 0, 0, 0.233);
       }
     }
 
-    button:first-child {
-      padding-left: 24px;
-    }
-
     button {
       flex-direction: row;
       align-items: center;
@@ -45,7 +57,7 @@ $background-color: rgba(0, 0, 0, 0.233);
       background: none;
       border: none;
       color: white;
-      padding: 10px 16px 8px 16px;
+      padding: 10px 16px 12px 16px;
       border-bottom: 2px solid rgba(119, 119, 119, 0);
     }
     .selected {
@@ -126,7 +138,7 @@ $background-color: rgba(0, 0, 0, 0.233);
     transition: all 0.2s linear;
 
     &:hover {
-      opacity: 0.62;
+      opacity: 0.2;
     }
   }
 

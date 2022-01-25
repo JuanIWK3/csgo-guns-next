@@ -83,6 +83,7 @@ $background-color: rgba(0, 0, 0, 0.233);
   .circle {
     display: flex;
     position: relative;
+    overflow: hidden;
 
     .background {
       height: $circle-size;

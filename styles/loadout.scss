@@ -47,7 +47,7 @@ $background-color: rgba(0, 0, 0, 0.233);
     font-size: 0.8rem;
 
     .selected {
-      border-bottom: 2px solid rgb(230, 230, 230);
+      border-bottom: 2px solid #0070f3;
     }
 
     .sides {
@@ -152,6 +152,7 @@ $background-color: rgba(0, 0, 0, 0.233);
 
             &:hover {
               opacity: 0.2;
+              background-color: #0071f344;
             }
           }
         }
@@ -216,6 +217,10 @@ $background-color: rgba(0, 0, 0, 0.233);
 
           z-index: 2;
           cursor: pointer;
+
+          &:hover {
+            background-color: #0071f31c;
+          }
 
           @media only screen and (min-width: 900px) {
             left: calc($circle-size2 * 0.365);

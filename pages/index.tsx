@@ -37,30 +37,19 @@ const Home: NextPage<{ guns: Gun[] }> = ({ guns }) => {
       }
 
       if (temp.length == 7) {
-        setExtraGun(temp[6]);
-        temp.pop();
+        for (let i = 0; i < temp.length; i++) {
+          if (
+            temp[i].name === 'M4A1-S' ||
+            temp[i].name === 'USP-S' ||
+            temp[i].name === 'TEC-9'
+          ) {
+            console.log(temp[i].name);
+            setExtraGun(temp[i]);
+            temp.splice(i, 1);
+          }
+        }
       } else {
         setExtraGun(null);
-      }
-
-      if (temp.length == 5) {
-        temp.push({
-          id: '',
-          name: '',
-          ammo: '',
-          killAward: '',
-          damage: 0,
-          firerate: 0,
-          recoilControl: 0,
-          accurateRange: '',
-          armorPenetration: 0,
-          type: '',
-          side: '',
-          price: 0,
-          picture: '',
-          created_at: '',
-          updated_at: '',
-        });
       }
 
       setSixGuns(temp);
@@ -184,6 +173,11 @@ const Home: NextPage<{ guns: Gun[] }> = ({ guns }) => {
                 </div>
               );
             })}
+            {sixGuns.length == 5 && (
+              <div className="pie">
+                <div className="pie-color"></div>
+              </div>
+            )}
             {sixGuns.length == 1 && (
               <>
                 <div className="pie">

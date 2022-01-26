@@ -6,22 +6,29 @@ $background-color: rgba(0, 0, 0, 0.233);
 .loadout-container {
   margin: 0;
   padding: 0px;
-  box-sizing: border-box;
+  height: 100%;
+
   .title {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    border-bottom: $border;
+
     width: 100%;
+
     padding: 16px 24px 8px 24px;
 
+    border-bottom: $border;
+
     button {
-      border-radius: 0.3rem;
       padding: 8px;
-      background-color: #222;
-      color: #0070f3;
-      transition: all 0.2s linear;
+
+      border-radius: 0.3rem;
       border: 1px solid #0070f3;
+
+      color: #0070f3;
+      background-color: #222;
+
+      transition: all 0.2s linear;
       &:hover {
         background-color: rgb(29, 29, 29);
       }
@@ -32,20 +39,22 @@ $background-color: rgba(0, 0, 0, 0.233);
     display: flex;
     align-items: center;
     justify-content: space-between;
-    border-bottom: $border;
+
     width: 100%;
+
+    border-bottom: $border;
+
     font-size: 0.8rem;
 
+    .selected {
+      border-bottom: 2px solid rgb(230, 230, 230);
+    }
+
     .sides {
-      img {
+      #side-img {
         height: 45px;
         padding: 8px;
         cursor: pointer;
-        border-bottom: 2px solid rgba(119, 119, 119, 0);
-      }
-
-      .selected {
-        border-bottom: 2px solid rgb(230, 230, 230);
       }
     }
 
@@ -54,309 +63,307 @@ $background-color: rgba(0, 0, 0, 0.233);
       align-items: center;
       justify-content: center;
       text-align: center;
+
+      padding: 10px 16px 12px 16px;
+
       background: none;
       border: none;
-      color: white;
-      padding: 10px 16px 12px 16px;
       border-bottom: 2px solid rgba(119, 119, 119, 0);
-    }
-    .selected {
-      border-bottom: 2px solid rgb(230, 230, 230);
+      color: white;
     }
   }
 
-  .loadout {
-    padding-top: 30px;
-    padding-bottom: 30px;
+  main {
     display: flex;
     align-items: center;
-    justify-content: center;
-  }
+    justify-content: space-evenly;
 
-  .data {
-    padding: 24px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
+    margin-right: 36px;
 
-    #name {
-      border-bottom: 1px solid #444;
-      margin-bottom: 8px;
-      color: #0070f3;
-    }
-    .data-item {
-      display: flex;
-      justify-content: space-between;
-      width: 100%;
-    }
-  }
-
-  .circle {
-    display: flex;
-    position: relative;
-    overflow: hidden;
-
-    .background {
-      height: $circle-size;
-      width: $circle-size;
-
-      @media only screen and (min-width: 900px) {
-        height: $circle-size2;
-        width: $circle-size2;
-      }
-    }
-  }
-
-  .pie {
-    background: rgba(0, 0, 0, 0);
-    border-radius: 50%;
-
-    user-select: none; /* supported by Chrome and Opera */
-    -webkit-user-select: none; /* Safari */
-    -khtml-user-select: none; /* Konqueror HTML */
-    -moz-user-select: none; /* Firefox */
-    -ms-user-select: none; /* Internet Explorer/Edge */
-
-    position: absolute;
-
-    cursor: pointer;
-
-    height: $circle-size;
-    width: $circle-size;
-
-    @media only screen and (min-width: 900px) {
-      height: $circle-size2;
-      width: $circle-size2;
-    }
-  }
-
-  .pie-color {
-    width: 100%;
-    height: 100%;
-    border-radius: 50%;
-    transition: all 0.2s linear;
-
-    &:hover {
-      opacity: 0.2;
-    }
-  }
-
-  .pie:nth-child(1) {
-    clip-path: polygon(50% 50%, 37% 100%, 100% 100%);
-    transform: rotate(165deg);
-  }
-
-  .pie-color:nth-child(1) {
-    background-color: $background-color;
-  }
-
-  .pie:nth-child(2) {
-    clip-path: polygon(50% 50%, 37% 100%, 100% 100%);
-    transform: rotate(225deg);
-  }
-
-  .pie-color:nth-child(2) {
-    background-color: $background-color;
-  }
-
-  .pie:nth-child(3) {
-    clip-path: polygon(50% 50%, 37% 100%, 100% 100%);
-    transform: rotate(285deg);
-  }
-
-  .pie-color:nth-child(3) {
-    background-color: $background-color;
-  }
-
-  .pie:nth-child(4) {
-    clip-path: polygon(50% 50%, 37% 100%, 100% 100%);
-    transform: rotate(-15deg);
-  }
-
-  .pie-color:nth-child(4) {
-    background-color: $background-color;
-  }
-  .pie:nth-child(5) {
-    clip-path: polygon(50% 50%, 37% 100%, 100% 100%);
-    transform: rotate(45deg);
-  }
-
-  .pie-color:nth-child(5) {
-    background-color: $background-color;
-  }
-  .pie:nth-child(6) {
-    clip-path: polygon(50% 50%, 37% 100%, 100% 100%);
-    transform: rotate(105deg);
-  }
-
-  .pie-color:nth-child(6) {
-    background-color: $background-color;
-  }
-
-  .circle {
-    position: relative;
-
-    width: $circle-size;
-    height: $circle-size;
-
-    @media only screen and (min-width: 900px) {
-      height: $circle-size2;
-      width: $circle-size2;
+    @media only screen and (max-width: 900px) {
+      flex-direction: column;
     }
 
-    #extra-gun {
-      left: calc($circle-size * 0.365);
-      top: calc($circle-size * 0.36);
-      margin: 0;
-      background-color: rgb(24, 24, 24);
-      border: $border;
-      border-radius: 50%;
-      width: calc($circle-size * 0.26);
-      height: calc($circle-size * 0.26);
-      z-index: 2;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      position: absolute;
-      font-size: calc($circle-size / 25);
-      cursor: pointer;
-
-      @media only screen and (min-width: 900px) {
-        left: calc($circle-size2 * 0.365);
-        top: calc($circle-size2 * 0.36);
-        width: calc($circle-size2 * 0.26);
-        height: calc($circle-size2 * 0.26);
-        font-size: calc($circle-size2 / 25);
-      }
-
-      img {
-        height: auto;
-        width: calc($circle-size * 0.16);
-
-        @media only screen and (min-width: 900px) {
-          width: calc($circle-size2 * 0.16);
-        }
-      }
-    }
-
-    .names-images {
-      position: relative;
-
-      width: $circle-size;
-      height: $circle-size;
-
-      z-index: -1;
-
-      @media only screen and (min-width: 900px) {
-        height: $circle-size2;
-        width: $circle-size2;
-      }
-
-      p:hover {
-        cursor: pointer;
-        color: #0070f3;
-      }
-
-      p {
-        align-items: center;
-        justify-content: center;
-        text-align: center;
-        position: absolute;
-
-        border-radius: 50%;
-
-        img {
-          height: auto;
-          width: calc($circle-size * 0.16);
-
-          @media only screen and (min-width: 900px) {
-            width: calc($circle-size2 * 0.16);
-          }
-        }
-      }
-
-      p:nth-child(1) {
-        left: calc($circle-size * 0.2);
-        top: calc($circle-size * 0.16);
-        font-size: calc($circle-size / 25);
-
-        @media only screen and (min-width: 900px) {
-          left: calc($circle-size2 * 0.2);
-          top: calc($circle-size2 * 0.16);
-          font-size: calc($circle-size2 / 25);
-        }
-      }
-      p:nth-child(2) {
-        left: calc($circle-size * 0.58);
-        top: calc($circle-size * 0.16);
-        font-size: calc($circle-size / 25);
-
-        @media only screen and (min-width: 900px) {
-          left: calc($circle-size2 * 0.58);
-          top: calc($circle-size2 * 0.16);
-          font-size: calc($circle-size2 / 25);
-        }
-      }
-      p:nth-child(3) {
-        left: calc($circle-size * 0.76);
-        top: calc($circle-size * 0.43);
-        font-size: calc($circle-size / 25);
-
-        @media only screen and (min-width: 900px) {
-          left: calc($circle-size2 * 0.76);
-          top: calc($circle-size2 * 0.43);
-          font-size: calc($circle-size2 / 25);
-        }
-      }
-      p:nth-child(4) {
-        left: calc($circle-size * 0.58);
-        top: calc($circle-size * 0.73);
-        font-size: calc($circle-size / 25);
-
-        @media only screen and (min-width: 900px) {
-          left: calc($circle-size2 * 0.58);
-          top: calc($circle-size2 * 0.73);
-          font-size: calc($circle-size2 / 25);
-        }
-      }
-      p:nth-child(5) {
-        left: calc($circle-size * 0.25);
-        top: calc($circle-size * 0.73);
-        font-size: calc($circle-size / 25);
-
-        @media only screen and (min-width: 900px) {
-          left: calc($circle-size2 * 0.25);
-          top: calc($circle-size2 * 0.73);
-          font-size: calc($circle-size2 / 25);
-        }
-      }
-      p:nth-child(6) {
-        left: calc($circle-size * 0.1);
-        top: calc($circle-size * 0.43);
-        font-size: calc($circle-size / 25);
-
-        @media only screen and (min-width: 900px) {
-          left: calc($circle-size2 * 0.1);
-          top: calc($circle-size2 * 0.43);
-          font-size: calc($circle-size2 / 25);
-        }
-      }
-    }
-  }
-
-  .loadout-data {
     @media only screen and (min-width: 900px) {
       display: flex;
 
       .loadout {
-        flex: 4;
         padding-top: 100px;
         padding-bottom: 100px;
       }
+    }
 
-      .data {
-        flex: 3;
+    .loadout {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      padding-top: 30px;
+      padding-bottom: 30px;
+
+      .circle {
+        display: flex;
+        position: relative;
+        overflow: hidden;
+
+        width: $circle-size;
+        height: $circle-size;
+
+        .background {
+          height: $circle-size;
+          width: $circle-size;
+
+          @media only screen and (min-width: 900px) {
+            height: $circle-size2;
+            width: $circle-size2;
+          }
+        }
+
+        .pie {
+          background: rgba(0, 0, 0, 0);
+          border-radius: 50%;
+
+          user-select: none; /* supported by Chrome and Opera */
+          -webkit-user-select: none; /* Safari */
+          -khtml-user-select: none; /* Konqueror HTML */
+          -moz-user-select: none; /* Firefox */
+          -ms-user-select: none; /* Internet Explorer/Edge */
+
+          position: absolute;
+
+          cursor: pointer;
+
+          height: $circle-size;
+          width: $circle-size;
+
+          @media only screen and (min-width: 900px) {
+            height: $circle-size2;
+            width: $circle-size2;
+          }
+          .pie-color {
+            width: 100%;
+            height: 100%;
+
+            border-radius: 50%;
+
+            background-color: $background-color;
+
+            transition: all 0.2s linear;
+
+            &:hover {
+              opacity: 0.2;
+            }
+          }
+        }
+
+        .pie:nth-child(1) {
+          clip-path: polygon(50% 50%, 37% 100%, 100% 100%);
+          transform: rotate(165deg);
+        }
+
+        .pie:nth-child(2) {
+          clip-path: polygon(50% 50%, 37% 100%, 100% 100%);
+          transform: rotate(225deg);
+        }
+
+        .pie:nth-child(3) {
+          clip-path: polygon(50% 50%, 37% 100%, 100% 100%);
+          transform: rotate(285deg);
+        }
+
+        .pie:nth-child(4) {
+          clip-path: polygon(50% 50%, 37% 100%, 100% 100%);
+          transform: rotate(-15deg);
+        }
+
+        .pie:nth-child(5) {
+          clip-path: polygon(50% 50%, 37% 100%, 100% 100%);
+          transform: rotate(45deg);
+        }
+
+        .pie:nth-child(6) {
+          clip-path: polygon(50% 50%, 37% 100%, 100% 100%);
+          transform: rotate(105deg);
+        }
+
+        @media only screen and (min-width: 900px) {
+          height: $circle-size2;
+          width: $circle-size2;
+        }
+
+        #extra-gun {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          text-align: center;
+          position: absolute;
+
+          width: calc($circle-size * 0.26);
+          height: calc($circle-size * 0.26);
+
+          margin: 0;
+
+          left: calc($circle-size * 0.365);
+          top: calc($circle-size * 0.36);
+
+          background-color: rgb(24, 24, 24);
+
+          border: $border;
+          border-radius: 50%;
+
+          font-size: calc($circle-size / 25);
+
+          z-index: 2;
+          cursor: pointer;
+
+          @media only screen and (min-width: 900px) {
+            left: calc($circle-size2 * 0.365);
+            top: calc($circle-size2 * 0.36);
+            width: calc($circle-size2 * 0.26);
+            height: calc($circle-size2 * 0.26);
+            font-size: calc($circle-size2 / 25);
+          }
+
+          img {
+            height: auto;
+            width: calc($circle-size * 0.16);
+
+            @media only screen and (min-width: 900px) {
+              width: calc($circle-size2 * 0.16);
+            }
+          }
+        }
+
+        .names-images {
+          position: relative;
+
+          width: $circle-size;
+          height: $circle-size;
+
+          z-index: -1;
+
+          @media only screen and (min-width: 900px) {
+            height: $circle-size2;
+            width: $circle-size2;
+          }
+
+          p:hover {
+            cursor: pointer;
+            color: #0070f3;
+          }
+
+          p {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            text-align: center;
+            position: absolute;
+
+            border-radius: 50%;
+
+            img {
+              height: auto;
+              width: calc($circle-size * 0.16);
+
+              @media only screen and (min-width: 900px) {
+                width: calc($circle-size2 * 0.16);
+              }
+            }
+          }
+
+          p:nth-child(1) {
+            left: calc($circle-size * 0.2);
+            top: calc($circle-size * 0.16);
+            font-size: calc($circle-size / 25);
+
+            @media only screen and (min-width: 900px) {
+              left: calc($circle-size2 * 0.2);
+              top: calc($circle-size2 * 0.16);
+              font-size: calc($circle-size2 / 25);
+            }
+          }
+          p:nth-child(2) {
+            left: calc($circle-size * 0.55);
+            top: calc($circle-size * 0.16);
+            font-size: calc($circle-size / 25);
+
+            @media only screen and (min-width: 900px) {
+              left: calc($circle-size2 * 0.55);
+              top: calc($circle-size2 * 0.16);
+              font-size: calc($circle-size2 / 25);
+            }
+          }
+          p:nth-child(3) {
+            left: calc($circle-size * 0.76);
+            top: calc($circle-size * 0.43);
+            font-size: calc($circle-size / 25);
+
+            @media only screen and (min-width: 900px) {
+              left: calc($circle-size2 * 0.76);
+              top: calc($circle-size2 * 0.43);
+              font-size: calc($circle-size2 / 25);
+            }
+          }
+          p:nth-child(4) {
+            left: calc($circle-size * 0.58);
+            top: calc($circle-size * 0.73);
+            font-size: calc($circle-size / 25);
+
+            @media only screen and (min-width: 900px) {
+              left: calc($circle-size2 * 0.58);
+              top: calc($circle-size2 * 0.73);
+              font-size: calc($circle-size2 / 25);
+            }
+          }
+          p:nth-child(5) {
+            left: calc($circle-size * 0.25);
+            top: calc($circle-size * 0.73);
+            font-size: calc($circle-size / 25);
+
+            @media only screen and (min-width: 900px) {
+              left: calc($circle-size2 * 0.25);
+              top: calc($circle-size2 * 0.73);
+              font-size: calc($circle-size2 / 25);
+            }
+          }
+          p:nth-child(6) {
+            left: calc($circle-size * 0.1);
+            top: calc($circle-size * 0.43);
+            font-size: calc($circle-size / 25);
+
+            @media only screen and (min-width: 900px) {
+              left: calc($circle-size2 * 0.1);
+              top: calc($circle-size2 * 0.43);
+              font-size: calc($circle-size2 / 25);
+            }
+          }
+        }
+      }
+    }
+
+    .data {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+
+      width: 90vw;
+      min-width: 250px;
+      max-width: 450px;
+
+      padding: 24px;
+
+      #name {
+        border-bottom: 1px solid #444;
+        margin-bottom: 8px;
+        color: #0070f3;
+      }
+      .data-item {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
       }
     }
   }

@@ -1,52 +1,72 @@
-import type { GetStaticProps, NextPage } from "next";
-import { useEffect, useState } from "react";
+import type { GetStaticProps, NextPage } from 'next';
+import { useEffect, useState } from 'react';
 
-import styles from "../styles/Home.module.css";
+import styles from '../styles/Home.module.css';
 
-import "bootswatch/dist/darkly/bootstrap.min.css";
+import 'bootswatch/dist/darkly/bootstrap.min.css';
 
-import { Gun } from "../types";
-import Link from "next/link";
-import { Button } from "react-bootstrap";
-import Head from "next/head";
+import { Gun } from '../types';
+import Link from 'next/link';
+import { Button } from 'react-bootstrap';
+import Head from 'next/head';
+import Image from 'next/image';
+import imageLoader from '../imageLoader';
 
 const Home: NextPage<{ guns: Gun[] }> = ({ guns }) => {
   //* ====================== Use State======================
   const [extraGun, setExtraGun] = useState<Gun | null>(null);
-  const [filterSide, setFilterSide] = useState("TERRORISTS");
-  const [filterType, setFilterType] = useState("RIFLE");
+  const [filterSide, setFilterSide] = useState('TERRORISTS');
+  const [filterType, setFilterType] = useState('RIFLE');
   const [selectedGun, setSelectedGun] = useState<Gun>(guns[25]); //* AK
 
   const [sixGuns, setSixGuns] = useState<Gun[]>(guns.slice(0, 6));
 
   useEffect(() => {
+    const filterGuns = () => {
+      let temp = guns;
+
+      temp = guns.filter((gun) => gun.type === filterType);
+
+      if (filterSide === 'TERRORISTS') {
+        temp = temp.filter((gun) => gun.side.includes(filterSide));
+        temp = temp.filter((gun) => !(gun.side.length == 18));
+      }
+      if (filterSide === 'COUNTER-TERRORISTS') {
+        temp = temp.filter((gun) => gun.side.includes(filterSide));
+        temp = temp.filter((gun) => !(gun.side.length == 10));
+      }
+
+      if (temp.length == 7) {
+        setExtraGun(temp[6]);
+        temp.pop();
+      } else {
+        setExtraGun(null);
+      }
+
+      if (temp.length == 5) {
+        temp.push({
+          id: '',
+          name: '',
+          ammo: '',
+          killAward: '',
+          damage: 0,
+          firerate: 0,
+          recoilControl: 0,
+          accurateRange: '',
+          armorPenetration: 0,
+          type: '',
+          side: '',
+          price: 0,
+          picture: '',
+          created_at: '',
+          updated_at: '',
+        });
+      }
+
+      setSixGuns(temp);
+    };
     filterGuns();
-  }, [filterSide, filterType]);
-
-  const filterGuns = () => {
-    let temp = guns;
-
-    temp = guns.filter((gun) => gun.type === filterType);
-
-    if (filterSide === "TERRORISTS") {
-      temp = temp.filter((gun) => gun.side.includes(filterSide));
-      temp = temp.filter((gun) => !(gun.side.length == 18));
-    }
-    if (filterSide === "COUNTER-TERRORISTS") {
-      temp = temp.filter((gun) => gun.side.includes(filterSide));
-      temp = temp.filter((gun) => !(gun.side.length == 10));
-    }
-
-    if (temp.length == 7) {
-      setExtraGun(temp[6]);
-      temp.pop();
-    } else {
-      setExtraGun(null);
-    }
-
-    console.log(temp);
-    setSixGuns(temp);
-  };
+  }, [filterSide, filterType, guns]);
 
   let gunTypes: string[] = [];
 
@@ -63,8 +83,8 @@ const Home: NextPage<{ guns: Gun[] }> = ({ guns }) => {
   };
 
   const splitFunction = (url: string) => {
-    let word = url.split(".png");
-    return word[0] + ".png";
+    let word = url.split('.png');
+    return word[0] + '.png';
   };
 
   function removeDuplicates(arr: string[]) {
@@ -78,12 +98,13 @@ const Home: NextPage<{ guns: Gun[] }> = ({ guns }) => {
   return (
     <div className="loadout-container">
       <Head>
-        <title>CSGO Guns</title>
+        <title>CSGO Weapons</title>
         <meta name="description" content="Guns data" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <div className="title">
-        <h1>CSGO Guns</h1>
+        <h1>CSGO Weapons</h1>
+
         <Link href="/table">
           <a>
             <button>Table</button>
@@ -95,7 +116,7 @@ const Home: NextPage<{ guns: Gun[] }> = ({ guns }) => {
           {gunTypes.map((type) => {
             return (
               <button
-                className={type === filterType ? "selected" : "notSelected"}
+                className={type === filterType ? 'selected' : 'notSelected'}
                 key={type}
                 onClick={() => {
                   setFilterType(type);
@@ -107,27 +128,47 @@ const Home: NextPage<{ guns: Gun[] }> = ({ guns }) => {
           })}
         </div>
         <div className="sides">
-          <img
-            className={filterSide === "TERRORISTS" ? "selected" : "notSelected"}
-            src="https://2.bp.blogspot.com/-fhx4dhePSGQ/WdtNzaf0HBI/AAAAAAAALCE/HDUfau2G97YZ5_LZrH_VaYS8VOyQeMP1QCLcBGAs/s1600/logo_TR_csgo.png"
-            alt=""
-            onClick={() => {
-              setFilterSide("TERRORISTS");
-            }}
-          />
-          <img
+          <button
+            id="side-img"
+            className={filterSide === 'TERRORISTS' ? 'selected' : 'notSelected'}
+          >
+            <Image
+              loader={imageLoader}
+              unoptimized
+              src="https://2.bp.blogspot.com/-fhx4dhePSGQ/WdtNzaf0HBI/AAAAAAAALCE/HDUfau2G97YZ5_LZrH_VaYS8VOyQeMP1QCLcBGAs/s1600/logo_TR_csgo.png"
+              alt=""
+              height={25}
+              width={25}
+              onClick={() => {
+                setFilterSide('TERRORISTS');
+              }}
+            />
+          </button>
+          <button
+            id="side-img"
             className={
-              filterSide === "COUNTER-TERRORISTS" ? "selected" : "notSelected"
+              filterSide === 'COUNTER-TERRORISTS' ? 'selected' : 'notSelected'
             }
-            src="https://static.wikia.nocookie.net/cswikia/images/4/4c/Csgo_CT_icon_alt.png"
-            alt=""
-            onClick={() => {
-              setFilterSide("COUNTER-TERRORISTS");
-            }}
-          />
+          >
+            <Image
+              loader={imageLoader}
+              unoptimized
+              height={25}
+              width={25}
+              id="side-img"
+              className={
+                filterSide === 'COUNTER-TERRORISTS' ? 'selected' : 'notSelected'
+              }
+              src="https://static.wikia.nocookie.net/cswikia/images/4/4c/Csgo_CT_icon_alt.png"
+              alt=""
+              onClick={() => {
+                setFilterSide('COUNTER-TERRORISTS');
+              }}
+            />
+          </button>
         </div>
       </div>
-      <div className="loadout-data">
+      <main>
         <div className="loadout">
           <div className="circle">
             {sixGuns.map((gun) => {
@@ -143,11 +184,29 @@ const Home: NextPage<{ guns: Gun[] }> = ({ guns }) => {
                 </div>
               );
             })}
+            {sixGuns.length == 1 && (
+              <>
+                <div className="pie">
+                  <div className="pie-color"></div>
+                </div>
+                <div className="pie">
+                  <div className="pie-color"></div>
+                </div>
+                <div className="pie">
+                  <div className="pie-color"></div>
+                </div>
+                <div className="pie">
+                  <div className="pie-color"></div>
+                </div>
+                <div className="pie">
+                  <div className="pie-color"></div>
+                </div>
+              </>
+            )}
             <div className="names-images">
               {sixGuns.map((gun) => {
                 return (
                   <p
-                    style={{ display: "flex", flexDirection: "column" }}
                     key={gun.id}
                     onClick={() => {
                       selectGun(gun.id);
@@ -162,7 +221,6 @@ const Home: NextPage<{ guns: Gun[] }> = ({ guns }) => {
             {extraGun && (
               <p
                 id="extra-gun"
-                style={{ display: "flex", flexDirection: "column" }}
                 onClick={() => {
                   selectGun(extraGun.id);
                 }}
@@ -174,7 +232,15 @@ const Home: NextPage<{ guns: Gun[] }> = ({ guns }) => {
           </div>
         </div>
         <div className="data">
-          <img src={splitFunction(selectedGun.picture)} alt="" />
+          <Image
+            loader={imageLoader}
+            unoptimized
+            height={150}
+            width={200}
+            id="data-image"
+            src={splitFunction(selectedGun.picture)}
+            alt=""
+          />
           <p id="name">{selectedGun.name}</p>
           <div className="data-item">
             <p>Ammo</p>
@@ -182,7 +248,7 @@ const Home: NextPage<{ guns: Gun[] }> = ({ guns }) => {
           </div>
           <div className="data-item">
             <p>Kill Award</p>
-            <p>{selectedGun.killAward}</p>
+            <p>$ {selectedGun.killAward}</p>
           </div>
           <div className="data-item">
             <p>Firerate</p>
@@ -201,13 +267,13 @@ const Home: NextPage<{ guns: Gun[] }> = ({ guns }) => {
             <p>{selectedGun.armorPenetration}</p>
           </div>
         </div>
-      </div>
+      </main>
     </div>
   );
 };
 
 export const getStaticProps: GetStaticProps = async (context) => {
-  const res = await fetch("https://csgogunsapi.herokuapp.com/");
+  const res = await fetch('https://csgogunsapi.herokuapp.com/');
   const data: Gun[] = await res.json();
 
   return { props: { guns: data } };

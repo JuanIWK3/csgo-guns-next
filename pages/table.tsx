@@ -1,22 +1,22 @@
-import type { GetStaticProps, NextPage } from "next";
-import Head from "next/head";
-import { SyntheticEvent, useEffect, useRef, useState } from "react";
+import type { GetStaticProps, NextPage } from 'next';
+import Head from 'next/head';
+import { SyntheticEvent, useEffect, useRef, useState } from 'react';
 
-import styles from "../styles/Home.module.css";
-import "bootswatch/dist/darkly/bootstrap.min.css";
-import { Button, Dropdown, Form, FormControl, Table } from "react-bootstrap";
+import styles from '../styles/Home.module.css';
+import 'bootswatch/dist/darkly/bootstrap.min.css';
+import { Button, Dropdown, Form, FormControl, Table } from 'react-bootstrap';
 
-import { Gun } from "../types";
-import Link from "next/link";
+import { Gun } from '../types';
+import Link from 'next/link';
 
 const Home: NextPage<{ guns: Gun[] }> = ({ guns }) => {
   const [filteredGuns, setFilteredGuns] = useState<Gun[]>(guns);
-  const [filterSide, setFilterSide] = useState("TERRORISTS");
-  const [filterType, setFilterType] = useState("");
+  const [filterSide, setFilterSide] = useState('TERRORISTS');
+  const [filterType, setFilterType] = useState('');
   const [price, setPrice] = useState(200);
-  const [typeDrop, setTypeDrop] = useState("Types");
-  const [sideDrop, setSideDrop] = useState("Sides");
-  const [priceDrop, setPriceDrop] = useState("Price");
+  const [typeDrop, setTypeDrop] = useState('Types');
+  const [sideDrop, setSideDrop] = useState('Sides');
+  const [priceDrop, setPriceDrop] = useState('Price');
   const allGuns = guns;
   let gunTypes: string[] = [];
   let gunSides: string[] = [];
@@ -34,30 +34,28 @@ const Home: NextPage<{ guns: Gun[] }> = ({ guns }) => {
   gunSides = removeDuplicates(gunSides);
 
   useEffect(() => {
+    const filterGuns = () => {
+      let temp = guns;
+
+      if (filterType != '') {
+        temp = guns.filter((gun) => gun.type === filterType);
+      }
+
+      if (filterSide != '') {
+        if (filterSide === 'TERRORISTS') {
+          temp = temp.filter((gun) => gun.side.includes(filterSide));
+          temp = temp.filter((gun) => !(gun.side.length == 18));
+        }
+        if (filterSide === 'COUNTER-TERRORISTS') {
+          temp = temp.filter((gun) => gun.side.includes(filterSide));
+          temp = temp.filter((gun) => !(gun.side.length == 10));
+        }
+      }
+
+      setFilteredGuns(temp);
+    };
     filterGuns();
-  }, [filterSide, filterType]);
-
-  const filterGuns = () => {
-    let temp = guns;
-
-    if (filterType != "") {
-      temp = guns.filter((gun) => gun.type === filterType);
-    }
-
-    if (filterSide != "") {
-      if (filterSide === "TERRORISTS") {
-        temp = temp.filter((gun) => gun.side.includes(filterSide));
-        temp = temp.filter((gun) => !(gun.side.length == 18));
-      }
-      if (filterSide === "COUNTER-TERRORISTS") {
-        temp = temp.filter((gun) => gun.side.includes(filterSide));
-        temp = temp.filter((gun) => !(gun.side.length == 10));
-      }
-    }
-
-    console.log(temp);
-    setFilteredGuns(temp);
-  };
+  }, [filterSide, filterType, guns]);
 
   function removeDuplicates(arr: string[]) {
     let s = new Set(arr);
@@ -96,9 +94,9 @@ const Home: NextPage<{ guns: Gun[] }> = ({ guns }) => {
         </Link>
         <FormControl
           style={{
-            backgroundColor: "#222",
-            border: "1px solid #333",
-            color: "#fff",
+            backgroundColor: '#222',
+            border: '1px solid #333',
+            color: '#fff',
           }}
           className="text-input"
           placeholder="Search Guns"
@@ -119,7 +117,7 @@ const Home: NextPage<{ guns: Gun[] }> = ({ guns }) => {
               <Dropdown.Item
                 id=""
                 onClick={(e) => {
-                  setTypeDrop("All Types"), setFilterType("");
+                  setTypeDrop('All Types'), setFilterType('');
                 }}
               >
                 All Types
@@ -152,7 +150,7 @@ const Home: NextPage<{ guns: Gun[] }> = ({ guns }) => {
               <Dropdown.Item
                 id=""
                 onClick={(e) => {
-                  setSideDrop("All Sides"), setFilterSide("");
+                  setSideDrop('All Sides'), setFilterSide('');
                 }}
               >
                 All Sides
@@ -221,7 +219,7 @@ const Home: NextPage<{ guns: Gun[] }> = ({ guns }) => {
 };
 
 export const getStaticProps: GetStaticProps = async (context) => {
-  const res = await fetch("https://csgogunsapi.herokuapp.com/");
+  const res = await fetch('https://csgogunsapi.herokuapp.com/');
   const data: Gun[] = await res.json();
 
   return { props: { guns: data } };

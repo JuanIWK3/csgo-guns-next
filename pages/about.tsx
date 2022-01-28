@@ -1,15 +1,10 @@
 import type { GetStaticProps, NextPage } from 'next';
 import Head from 'next/head';
-import { SyntheticEvent, useEffect, useRef, useState } from 'react';
 
 import styles from '../styles/Home.module.css';
 import 'bootswatch/dist/darkly/bootstrap.min.css';
-import { Button, Dropdown, Form, FormControl, Table } from 'react-bootstrap';
 
-import { Gun } from '../types';
-import Link from 'next/link';
-
-const Home: NextPage<{ guns: Gun[] }> = ({ guns }) => {
+const Home: NextPage = () => {
   return (
     <div className={styles.container}>
       <Head>

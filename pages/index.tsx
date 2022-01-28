@@ -1,13 +1,8 @@
+/* eslint-disable @next/next/no-img-element */
 import type { GetStaticProps, NextPage } from 'next';
 import { useEffect, useState } from 'react';
 
-import styles from '../styles/Home.module.css';
-
-import 'bootswatch/dist/Vapor/bootstrap.min.css';
-
 import { Gun } from '../types';
-import Link from 'next/link';
-import { Button } from 'react-bootstrap';
 import Head from 'next/head';
 import Image from 'next/image';
 import imageLoader from '../imageLoader';

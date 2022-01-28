@@ -4,7 +4,7 @@ import '../styles/about.scss';
 
 import styles from '../styles/Home.module.css';
 
-import 'bootswatch/dist/Vapor/bootstrap.min.css';
+import 'bootswatch/dist/vapor/bootstrap.min.css';
 
 import type { AppProps } from 'next/app';
 

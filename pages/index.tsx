@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 
 import styles from '../styles/Home.module.css';
 
-import 'bootswatch/dist/darkly/bootstrap.min.css';
+import 'bootswatch/dist/Vapor/bootstrap.min.css';
 
 import { Gun } from '../types';
 import Link from 'next/link';
@@ -11,6 +11,7 @@ import { Button } from 'react-bootstrap';
 import Head from 'next/head';
 import Image from 'next/image';
 import imageLoader from '../imageLoader';
+import { ModalAbout } from '../components/modal';
 
 const Home: NextPage<{ guns: Gun[] }> = ({ guns }) => {
   //* ====================== Use State======================
@@ -91,14 +92,11 @@ const Home: NextPage<{ guns: Gun[] }> = ({ guns }) => {
         <meta name="description" content="Guns data" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
+
       <div className="title">
         <h1>CSGO Weapons</h1>
 
-        <Link href="/table">
-          <a>
-            <button>Table</button>
-          </a>
-        </Link>
+        <ModalAbout />
       </div>
       <div className="filters">
         <div className="types">

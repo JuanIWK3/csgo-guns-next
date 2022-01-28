@@ -82,6 +82,7 @@ $background-color: rgba(0, 0, 0, 0.233);
 
     @media only screen and (max-width: 900px) {
       flex-direction: column;
+      margin-right: 0;
     }
 
     @media only screen and (min-width: 900px) {
@@ -219,7 +220,7 @@ $background-color: rgba(0, 0, 0, 0.233);
           cursor: pointer;
 
           &:hover {
-            background-color: #0071f31c;
+            background-color: #1c232b;
           }
 
           @media only screen and (min-width: 900px) {

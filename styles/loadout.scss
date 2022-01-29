@@ -153,7 +153,7 @@ $background-color: rgba(0, 0, 0, 0.233);
 
             &:hover {
               opacity: 0.2;
-              background-color: #0071f344;
+              background-color: #2400f344;
             }
           }
         }
@@ -209,7 +209,7 @@ $background-color: rgba(0, 0, 0, 0.233);
           left: calc($circle-size * 0.365);
           top: calc($circle-size * 0.36);
 
-          background-color: rgb(24, 24, 24);
+          background: #140727;
 
           border: $border;
           border-radius: 50%;
@@ -220,7 +220,7 @@ $background-color: rgba(0, 0, 0, 0.233);
           cursor: pointer;
 
           &:hover {
-            background-color: #1c232b;
+            background-color: #170735;
           }
 
           @media only screen and (min-width: 900px) {
@@ -252,11 +252,6 @@ $background-color: rgba(0, 0, 0, 0.233);
           @media only screen and (min-width: 900px) {
             height: $circle-size2;
             width: $circle-size2;
-          }
-
-          p:hover {
-            cursor: pointer;
-            color: #0070f3;
           }
 
           p {

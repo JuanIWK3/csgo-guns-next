@@ -9,7 +9,7 @@ export const ModalAbout = () => {
   return (
     <>
       <Button variant="primary" onClick={handleShow}>
-        About
+        Contact Us
       </Button>
 
       <Modal
